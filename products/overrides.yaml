@@ -1,0 +1,61 @@
+# Product-level records, keyed by barcode.
+#
+# WHAT THIS FILE IS FOR
+#
+# Two different jobs, in one file:
+#
+#   1. Correcting a product that a public product database already carries,
+#      where its brand or its manufacturer is wrong or missing.
+#   2. Being the ONLY record of a product that no public database has at all.
+#
+# The second case is why `name` exists. When an entry here is the sole record of
+# a product, nothing downstream has a name to display unless this file supplies
+# one. When correcting a product that a public database already carries, the
+# name comes from there and can be left out.
+#
+# WHY ENTRIES ARE KEYED BY MARKET
+#
+# A barcode identifies who registered the number, not who made the product.
+# Barcode to manufacturing country is not a function: one number, many correct
+# answers, and nothing in the number to tell them apart. The README works
+# through an illustration of this in full, under "Why product overrides are
+# keyed by market". That illustration is not a record and is not in this file.
+#
+# So facts split in two:
+#
+#   Market-invariant  name, brand, brand owner, ultimate parent
+#                     Same everywhere. Lives at the top level of an entry.
+#
+#   Market-variant    made in, operating company
+#                     Depends on where the product was bought. Lives ONLY
+#                     inside a markets: record, next to the market it applies to.
+#
+# Never write made_in or operator at the top level. If you only know that a
+# product exists and not where it was made, write the name and brand and stop.
+# Consumers of this file show "varies by market — check the label" when no
+# market record matches, which is a true answer. A guessed flag is not.
+
+# EXAMPLE ENTRY — this barcode, product and company do not exist.
+# Copy it, replace every value, and delete this header.
+- barcode: "9990007654324"        # quoted: a barcode is a string, leading zeros matter
+  name: Example Brand Sparkling Water 500 ml   # market-invariant; required if nothing else records this product
+  brand: b_example_brand          # market-invariant, so it sits here too
+
+  markets:
+    # One record per country the product is sold in. Add a second record rather
+    # than editing this one when you find the same barcode bottled elsewhere.
+    - market: GB                  # where the product was BOUGHT
+      made_in: GB                 # where the label says it was MADE
+      operator: e_example_holding_ltd   # entity running the plant
+      sources:
+        - "label text: Bottled by Example Holding Ltd, Unit 1, Example Way"
+      verified_on: 2026-09-15
+
+    - market: IE
+      made_in: GB                 # sold in Ireland, bottled in Great Britain
+      operator: e_example_holding_ltd
+      sources:
+        - "label text: Produced in Great Britain for Example Holding Ltd"
+      verified_on: 2026-09-15
+
+  example: true

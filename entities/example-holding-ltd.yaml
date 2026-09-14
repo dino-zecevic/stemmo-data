@@ -1,0 +1,22 @@
+# EXAMPLE FILE — this company does not exist.
+# It is here as a template. Copy it, replace every value, and delete this header.
+# One entity per file. File name: the legal name, lowercased, hyphenated.
+
+id: e_example_holding_ltd         # slug, prefix e_, lowercase, underscores
+name: Example Holding Ltd         # the exact registered legal name, legal form included
+country: GB                       # ISO 3166-1 alpha-2, country of REGISTRATION
+
+# parent: the entity that owns this one. null means this is the ultimate parent.
+# A subsidiary would instead read:  parent: e_example_holding_ltd
+parent: null
+
+lei: EXAMPLE00000000LEI88         # optional. GLEIF Legal Entity Identifier, 20 characters
+registry_id: "00000000"           # optional. National register number, as the register prints it
+
+sources:
+  - https://example.com/register/company/00000000   # national company register entry
+  - https://example.com/gleif/EXAMPLE00000000LEI88  # GLEIF record
+
+verified_on: 2026-09-15           # the date a human last opened those sources and checked
+
+example: true                     # marks this as a seeded template, not curated data

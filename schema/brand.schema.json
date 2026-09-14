@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stemmo.app/schema/brand.schema.json",
+  "title": "Brand",
+  "description": "A marketing name printed on products. A brand is not a company. One brand per file in brands/.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "brand_owner", "sources", "verified_on"],
+  "properties": {
+    "id": {
+      "description": "Stable slug identifying this brand.",
+      "type": "string",
+      "pattern": "^b_[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "name": {
+      "description": "The brand name as it is normally written.",
+      "type": "string",
+      "minLength": 1
+    },
+    "aliases": {
+      "description": "Alternative spellings, local-language forms and common transliterations.",
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "brand_owner": {
+      "description": "id of the entity that owns the trademark.",
+      "type": "string",
+      "pattern": "^e_[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "sources": {
+      "description": "Where this record was checked. At least one must be a URL anyone can open.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 },
+      "contains": { "type": "string", "pattern": "^https?://" },
+      "minContains": 1
+    },
+    "verified_on": {
+      "description": "ISO 8601 date on which a human last checked this record against its sources.",
+      "type": "string",
+      "format": "date",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "example": {
+      "description": "true if this file is a seeded template rather than curated data.",
+      "type": "boolean"
+    }
+  }
+}

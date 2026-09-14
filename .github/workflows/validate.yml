@@ -1,0 +1,200 @@
+name: validate
+
+# Every YAML file is checked against its JSON Schema, and every id that one
+# record points at must exist. A broken reference fails the build.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validator dependencies
+        run: pip install "jsonschema[format]==4.23.0" "pyyaml==6.0.2"
+
+      - name: Validate schemas and references
+        run: |
+          python - <<'PY'
+          import datetime, json, pathlib, sys
+          import yaml
+          from jsonschema import Draft202012Validator, FormatChecker
+
+          ROOT = pathlib.Path(".")
+          errors = []
+
+          def fail(where, message):
+              errors.append(f"{where}: {message}")
+
+          def load_schema(name):
+              return json.loads((ROOT / "schema" / name).read_text())
+
+          def normalise(value):
+              """PyYAML turns ISO dates into date objects. Schemas check strings."""
+              if isinstance(value, datetime.date):
+                  return value.isoformat()
+              if isinstance(value, dict):
+                  return {k: normalise(v) for k, v in value.items()}
+              if isinstance(value, list):
+                  return [normalise(v) for v in value]
+              return value
+
+          def yaml_files(directory):
+              d = ROOT / directory
+              return sorted(p for p in d.rglob("*") if p.suffix in (".yaml", ".yml"))
+
+          def load(path):
+              try:
+                  return normalise(yaml.safe_load(path.read_text()))
+              except yaml.YAMLError as exc:
+                  fail(path, f"not valid YAML: {exc}")
+                  return None
+
+          def check(path, document, schema):
+              validator = Draft202012Validator(schema, format_checker=FormatChecker())
+              for error in sorted(validator.iter_errors(document), key=lambda e: list(e.path)):
+                  location = "/".join(str(p) for p in error.path) or "(root)"
+                  fail(path, f"{location}: {error.message}")
+
+          # ISO 3166-1 alpha-2, officially assigned codes. A regex cannot tell GB from
+          # UK, or a typo from a country, so the list is spelled out.
+          ISO_3166_1 = set("""
+          AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ
+          BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR
+          CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH ER ES ET FI FJ FK FM FO FR
+          GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU
+          ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ
+          LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ
+          MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF
+          PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI
+          SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR
+          TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS YE YT ZA ZM ZW
+          """.split())
+
+          def check_country(where, field, value):
+              if isinstance(value, str) and value not in ISO_3166_1:
+                  fail(where, f"{field}: {value} is not an ISO 3166-1 alpha-2 country code")
+
+          entity_schema = load_schema("entity.schema.json")
+          brand_schema = load_schema("brand.schema.json")
+          product_schema = load_schema("product.schema.json")
+
+          # ---- entities -------------------------------------------------------
+          entities = {}
+          for path in yaml_files("entities"):
+              document = load(path)
+              if document is None:
+                  continue
+              if not isinstance(document, dict):
+                  fail(path, "expected a single entity mapping, got a list or scalar")
+                  continue
+              check(path, document, entity_schema)
+              check_country(path, "country", document.get("country"))
+              entity_id = document.get("id")
+              if isinstance(entity_id, str):
+                  if entity_id in entities:
+                      fail(path, f"duplicate entity id {entity_id}, already defined in {entities[entity_id][0]}")
+                  else:
+                      entities[entity_id] = (path, document)
+
+          # ---- brands ---------------------------------------------------------
+          brands = {}
+          for path in yaml_files("brands"):
+              document = load(path)
+              if document is None:
+                  continue
+              if not isinstance(document, dict):
+                  fail(path, "expected a single brand mapping, got a list or scalar")
+                  continue
+              check(path, document, brand_schema)
+              brand_id = document.get("id")
+              if isinstance(brand_id, str):
+                  if brand_id in brands:
+                      fail(path, f"duplicate brand id {brand_id}, already defined in {brands[brand_id][0]}")
+                  else:
+                      brands[brand_id] = (path, document)
+
+          # ---- reference integrity: entities ----------------------------------
+          for entity_id, (path, document) in entities.items():
+              parent = document.get("parent")
+              if parent is None:
+                  continue
+              if parent == entity_id:
+                  fail(path, f"{entity_id} is listed as its own parent")
+              elif parent not in entities:
+                  fail(path, f"parent {parent} does not exist in entities/")
+
+          # ownership must be a tree, not a ring
+          for entity_id in entities:
+              seen, cursor = [], entity_id
+              while cursor is not None and cursor in entities:
+                  if cursor in seen:
+                      fail(entities[entity_id][0], "ownership cycle: " + " -> ".join(seen + [cursor]))
+                      break
+                  seen.append(cursor)
+                  cursor = entities[cursor][1].get("parent")
+
+          # ---- reference integrity: brands ------------------------------------
+          for brand_id, (path, document) in brands.items():
+              owner = document.get("brand_owner")
+              if isinstance(owner, str) and owner not in entities:
+                  fail(path, f"brand_owner {owner} does not exist in entities/")
+
+          # ---- product overrides ----------------------------------------------
+          barcodes = {}
+          for path in yaml_files("products"):
+              document = load(path)
+              if document is None:
+                  continue
+              if document is None or not isinstance(document, list):
+                  fail(path, "expected a list of override entries")
+                  continue
+              check(path, document, product_schema)
+              for index, entry in enumerate(document):
+                  if not isinstance(entry, dict):
+                      continue
+                  where = f"{path}[{index}]"
+                  barcode = entry.get("barcode")
+                  if isinstance(barcode, str):
+                      if barcode in barcodes:
+                          fail(where, f"duplicate barcode {barcode}, already defined at {barcodes[barcode]}. "
+                                      "Add a markets: record to the existing entry instead.")
+                      else:
+                          barcodes[barcode] = where
+                  brand = entry.get("brand")
+                  if isinstance(brand, str) and brand not in brands:
+                      fail(where, f"brand {brand} does not exist in brands/")
+                  markets = entry.get("markets") or []
+                  seen_markets = set()
+                  for market_record in markets:
+                      if not isinstance(market_record, dict):
+                          continue
+                      market = market_record.get("market")
+                      if market in seen_markets:
+                          fail(where, f"duplicate market {market}: one record per market, per barcode")
+                      seen_markets.add(market)
+                      check_country(where, "market", market)
+                      check_country(where, f"market {market}: made_in", market_record.get("made_in"))
+                      operator = market_record.get("operator")
+                      if isinstance(operator, str) and operator not in entities:
+                          fail(where, f"market {market}: operator {operator} does not exist in entities/")
+
+          counts = f"{len(entities)} entities, {len(brands)} brands, {len(barcodes)} product overrides"
+          if errors:
+              print(f"Checked {counts}.\n")
+              print(f"{len(errors)} problem(s) found:\n")
+              for error in errors:
+                  print(f"  - {error}")
+              sys.exit(1)
+
+          print(f"OK: {counts}. All schemas valid, all references resolve.")
+          PY

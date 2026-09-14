@@ -1,0 +1,70 @@
+name: Incorrect data
+description: A brand, entity or ownership link in this dataset is wrong or out of date.
+title: "[incorrect] "
+labels: ["incorrect-data"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Corrections need a source, the same as new records do. A report without one
+        cannot be acted on, however plausible it looks. See EDITORIAL-POLICY.md.
+
+        This dataset records corporate structure only. Reports about a company's
+        conduct, positions or stances are closed without discussion.
+
+  - type: input
+    id: record
+    attributes:
+      label: Which record
+      description: The file path, or the id. For example `entities/example-holding-ltd.yaml` or `e_example_holding_ltd`.
+      placeholder: entities/example-holding-ltd.yaml
+    validations:
+      required: true
+
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What it says now, and what is wrong with it
+      placeholder: |
+        parent is e_old_owner_sa, but that company sold the business in March 2026.
+    validations:
+      required: true
+
+  - type: textarea
+    id: correct
+    attributes:
+      label: What it should say
+      placeholder: |
+        parent: e_new_owner_plc
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: |
+        One URL per line, each one openable by anyone. Accepted: national company
+        registers, GLEIF, annual reports, official company websites, official
+        acquisition press releases. Not accepted on their own: news articles,
+        Wikipedia, other apps, common knowledge.
+      placeholder: |
+        https://www.registry.example/company/123456
+        https://search.gleif.org/#/record/...
+    validations:
+      required: true
+
+  - type: input
+    id: market
+    attributes:
+      label: Market (only if this is a made-in or operator claim)
+      description: ISO 3166-1 alpha-2 code of the country the product was bought in. A manufacturing claim without a market cannot be recorded.
+      placeholder: GB
+
+  - type: checkboxes
+    id: acknowledgement
+    attributes:
+      label: Before submitting
+      options:
+        - label: My sources are independently checkable, and I have not inferred anything from a barcode prefix.
+          required: true

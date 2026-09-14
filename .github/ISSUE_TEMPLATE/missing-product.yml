@@ -1,0 +1,79 @@
+name: Missing product
+description: A barcode is not covered, or its brand is not in this dataset.
+title: "[missing] "
+labels: ["missing-product"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Most products need no entry here: the brand-to-owner mapping covers them.
+        Open this when the brand is missing, or when the barcode needs a per-market
+        record because you can see on the label who actually made it.
+
+        A barcode prefix says only which GS1 office issued the number. It is not
+        evidence of where the product was made, and will not be recorded as such.
+
+  - type: input
+    id: barcode
+    attributes:
+      label: Barcode
+      description: The full EAN/UPC digits, exactly as printed, leading zeros included.
+      placeholder: "9990001234560"
+    validations:
+      required: true
+
+  - type: input
+    id: brand
+    attributes:
+      label: Brand name on the package
+      placeholder: Brightwater
+    validations:
+      required: true
+
+  - type: input
+    id: product_name
+    attributes:
+      label: Product name on the package
+      description: |
+        The product name as printed, with size or variant if the package shows
+        one. Required if this barcode is in no public product database: the
+        record we create would otherwise have nothing to display.
+      placeholder: Brightwater Still Water 750 ml
+    validations:
+      required: true
+
+  - type: input
+    id: market
+    attributes:
+      label: Where you bought it
+      description: ISO 3166-1 alpha-2 code. The same barcode is made by different companies in different countries, so this is required.
+      placeholder: GB
+    validations:
+      required: true
+
+  - type: textarea
+    id: label_text
+    attributes:
+      label: Manufacturer text from the label
+      description: |
+        Type out the producer or filler line exactly as printed, in its original
+        language. This is the whole of the evidence, so copy it literally rather
+        than summarising it. A photo may be attached as well.
+      placeholder: |
+        Bottled under licence by Brightwater Drinks Ltd, Unit 2, Example Way
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Anything else
+      description: Official company statements, plant listings, or the company website. Optional if the label text above is complete.
+
+  - type: checkboxes
+    id: acknowledgement
+    attributes:
+      label: Before submitting
+      options:
+        - label: The manufacturer text above is transcribed from a physical package I have, not guessed or copied from another app.
+          required: true
