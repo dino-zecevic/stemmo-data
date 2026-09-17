@@ -1,0 +1,15 @@
+# "Naše" is a Bingo sub-brand line; the range is carried in the product name.
+# Trade mark 1417973 is the word mark BINGO. Two figurative marks exist for the
+#   same owner (1417974; 1619700, across 14 classes); the word mark is cited
+#   because it covers the name itself.
+
+id: b_bingo
+name: Bingo
+
+brand_owner: e_bingo
+
+sources:
+  - "https://www.tmdn.org/tmview/#/tmview/detail/BA502014001417973"
+  - "BA/IIP-BIH: trade mark 1417973, word mark BINGO, classes 29/30/35/39, registered 2016-02-01, expires 2034-06-27, owner \"Bingo\" d.o.o. Export-import Tuzla"
+
+verified_on: 2026-09-15

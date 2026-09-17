@@ -1,0 +1,32 @@
+# Register extract, checked 2026-09-15: MBS 65-01-0806-09, JIB 4200200160006,
+#   Naziv Coca-Cola HBC B-H d.o.o. Sarajevo (skraćeno CC HBC B-H d.o.o. Sarajevo),
+#   Adresa Hadžići, Sarajevo, ul. Mostarsko raskršće br. 1,
+#   status nije u stečaju/likvidaciji. Address and bottler agree with the carton.
+# GLEIF record, checked 2026-09-15: registeredAs 65-01-0806-09 agrees with bizreg,
+#   status ACTIVE, last updated 2026-04-16. PARTIALLY_CORROBORATED and
+#   NON_CONFORMING — GLEIF validated some but not all fields against a register,
+#   and it returns the name as COCA-COLA HBC B-H D.O.O. SARAJEVO. The name above
+#   is the register's, which is the authority on it; see EDITORIAL-POLICY.md.
+# Direct parent: reporting exception, category
+#   DIRECT_ACCOUNTING_CONSOLIDATION_PARENT, reason NON_PUBLIC. A direct
+#   accounting-consolidation parent exists and is not published.
+# Ultimate parent: published. Relationship IS_ULTIMATELY_CONSOLIDATED_BY, status
+#   ACTIVE, in force since 2017-09-27, end node 549300EFP3TNG7JGVE49.
+
+id: e_cchbc_bh
+name: Coca-Cola HBC B-H d.o.o. Sarajevo
+country: BA
+lei: 549300K4P51ZN6YBMH96
+registry_id: "65-01-0806-09"      # MBS
+
+parent_exception: NON_PUBLIC
+ultimate_parent: e_cchbc_ag
+
+sources:
+  - https://api.gleif.org/api/v1/lei-records/549300K4P51ZN6YBMH96
+  - https://api.gleif.org/api/v1/lei-records/549300K4P51ZN6YBMH96/direct-parent-reporting-exception
+  - https://api.gleif.org/api/v1/lei-records/549300K4P51ZN6YBMH96/ultimate-parent
+  - "BA/bizreg: MBS 65-01-0806-09"
+  - "label text: Po ovlaštenju The Coca-Cola Company proizvodi Coca-Cola HBC B-H d.o.o. Sarajevo, Mostarsko raskršće br. 1, 71240 Hadžići, BiH"
+
+verified_on: 2026-09-15

@@ -1,0 +1,18 @@
+# Register extract, checked 2026-09-15: MBS 32-01-0153-11, JIB 4210044720000,
+#   Naziv "Mliječna industrija 99" d.o.o. Gradačac (skraćeno "mi99" d.o.o.
+#   Gradačac — the origin of this id), Adresa Gradačac, Gradačac, Sarajevska bb,
+#   status nije u stečaju/likvidaciji.
+# Register address is Sarajevska bb (bez broja); the carton prints Sarajevska 126.
+# Legal name is the register's; the carton prints "Mliječna industrija 99 d.o.o.".
+# parent: not established — see EDITORIAL-POLICY.md
+
+id: e_mi99
+name: '"Mliječna industrija 99" d.o.o. Gradačac'
+country: BA
+registry_id: "32-01-0153-11"      # MBS
+
+sources:
+  - "BA/bizreg: MBS 32-01-0153-11"
+  - "label text: Mliječna industrija 99 d.o.o., ul. Sarajevska 126, 76 250, Gradačac, Bosna i Hercegovina"
+
+verified_on: 2026-09-15

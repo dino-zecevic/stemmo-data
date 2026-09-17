@@ -63,6 +63,11 @@
           "type": "string",
           "pattern": "^e_[a-z0-9]+(_[a-z0-9]+)*$"
         },
+        "placed_on_market_by": {
+          "description": "id of the entity that places this product on this market: the importer, the distributor, or, for an own-brand product, the retailer whose name is on the package. Not the manufacturer — use operator for the company running the plant. Market-variant by nature, because the same product reaches different countries through different importers, so it belongs here next to the market it applies to and never at the top level. Under BiH and EU food labelling rules this party must be named on almost every packaged product, and on an imported product it is often the only company named on the label at all.",
+          "type": "string",
+          "pattern": "^e_[a-z0-9]+(_[a-z0-9]+)*$"
+        },
         "sources": {
           "description": "Must cite a label photo or an official company statement. Transcribed label text is acceptable and is the cheapest form; prefix it with 'label text:'.",
           "type": "array",

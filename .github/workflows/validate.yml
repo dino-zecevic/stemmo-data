@@ -25,7 +25,7 @@ jobs:
       - name: Validate schemas and references
         run: |
           python - <<'PY'
-          import datetime, json, pathlib, sys
+          import datetime, json, pathlib, re, sys
           import yaml
           from jsonschema import Draft202012Validator, FormatChecker
 
@@ -80,6 +80,28 @@ jobs:
           TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS YE YT ZA ZM ZW
           """.split())
 
+          # A source is either a URL, or a structured register citation such as
+          # "BA/bizreg: MBS 1-5356" for a register with no stable per-record URL.
+          URL_SOURCE = re.compile(r"^https?://")
+          REGISTER_SOURCE = re.compile(r"^[A-Z]{2}/[A-Za-z][A-Za-z0-9_-]*: \S")
+
+          def source_forms(document):
+              sources = document.get("sources") or []
+              strings = [s for s in sources if isinstance(s, str)]
+              return (any(URL_SOURCE.match(s) for s in strings),
+                      any(REGISTER_SOURCE.match(s) for s in strings))
+
+          def lei_checksum_ok(lei):
+              """ISO 17442 / ISO 7064 Mod 97-10: letters map to 10..35, whole string mod 97 == 1."""
+              try:
+                  return int("".join(str(int(c, 36)) for c in lei)) % 97 == 1
+              except ValueError:
+                  return False
+
+          # Ownership is modelled as two independent edges: the immediate owner and
+          # the top of the chain. Either may be unknown, null, or withheld.
+          OWNERSHIP_FIELDS = ("parent", "ultimate_parent")
+
           def check_country(where, field, value):
               if isinstance(value, str) and value not in ISO_3166_1:
                   fail(where, f"{field}: {value} is not an ISO 3166-1 alpha-2 country code")
@@ -99,6 +121,20 @@ jobs:
                   continue
               check(path, document, entity_schema)
               check_country(path, "country", document.get("country"))
+              lei = document.get("lei")
+              if isinstance(lei, str) and not lei_checksum_ok(lei):
+                  fail(path, f"lei {lei}: fails the ISO 17442 Mod 97-10 check digits")
+              for field in OWNERSHIP_FIELDS:
+                  exception = f"{field}_exception"
+                  if field in document and exception in document:
+                      fail(path, f"{field} and {exception} are mutually exclusive: a record "
+                                 f"either names the owner, confirms there is none, or reports "
+                                 f"that the answer is withheld - never two of those at once")
+              has_url, has_register = source_forms(document)
+              if has_register and not has_url and not document.get("registry_id"):
+                  fail(path, "sources cite a register with no openable URL, so registry_id "
+                             "must be present: the identifier is the only thing that makes "
+                             "this record checkable")
               entity_id = document.get("id")
               if isinstance(entity_id, str):
                   if entity_id in entities:
@@ -125,23 +161,39 @@ jobs:
 
           # ---- reference integrity: entities ----------------------------------
           for entity_id, (path, document) in entities.items():
-              parent = document.get("parent")
-              if parent is None:
-                  continue
-              if parent == entity_id:
-                  fail(path, f"{entity_id} is listed as its own parent")
-              elif parent not in entities:
-                  fail(path, f"parent {parent} does not exist in entities/")
+              for field in OWNERSHIP_FIELDS:
+                  target = document.get(field)
+                  if target is None:          # absent, or an explicit null
+                      continue
+                  if target == entity_id:
+                      fail(path, f"{entity_id} is listed as its own {field}")
+                  elif target not in entities:
+                      fail(path, f"{field} {target} does not exist in entities/")
 
-          # ownership must be a tree, not a ring
+          # Ownership must be a tree, not a ring - across parent and ultimate_parent
+          # together, since a ring formed by mixing the two is still a ring.
+          def ownership_targets(entity_id):
+              document = entities[entity_id][1]
+              for field in OWNERSHIP_FIELDS:
+                  target = document.get(field)
+                  if isinstance(target, str) and target in entities:
+                      yield field, target
+
+          state = {entity_id: "unvisited" for entity_id in entities}
+
+          def walk(entity_id, trail):
+              state[entity_id] = "open"
+              for field, target in ownership_targets(entity_id):
+                  if state[target] == "open":
+                      cycle = " -> ".join(trail + [entity_id, target])
+                      fail(entities[entity_id][0], f"ownership cycle via {field}: {cycle}")
+                  elif state[target] == "unvisited":
+                      walk(target, trail + [entity_id])
+              state[entity_id] = "closed"
+
           for entity_id in entities:
-              seen, cursor = [], entity_id
-              while cursor is not None and cursor in entities:
-                  if cursor in seen:
-                      fail(entities[entity_id][0], "ownership cycle: " + " -> ".join(seen + [cursor]))
-                      break
-                  seen.append(cursor)
-                  cursor = entities[cursor][1].get("parent")
+              if state[entity_id] == "unvisited":
+                  walk(entity_id, [])
 
           # ---- reference integrity: brands ------------------------------------
           for brand_id, (path, document) in brands.items():
@@ -150,6 +202,19 @@ jobs:
                   fail(path, f"brand_owner {owner} does not exist in entities/")
 
           # ---- product overrides ----------------------------------------------
+          #
+          # Entries are split across products/*.yaml, one file per three-digit barcode
+          # prefix. Every file in the directory is read and the lists concatenated, so
+          # no filename is special and adding a new prefix file needs no change here.
+          #
+          # There is deliberately NO check that a barcode matches the file it sits in.
+          # The prefix filing convention is a convenience for sorting records and for
+          # keeping contributors out of each other's files; enforcing it would make it
+          # load-bearing and invite the reading that a prefix means a country, which
+          # EDITORIAL-POLICY.md forbids. A misfiled entry is untidy, not wrong.
+          #
+          # A barcode must still be unique across the whole directory, since the union
+          # of these files is one flat list of records keyed by barcode.
           barcodes = {}
           for path in yaml_files("products"):
               document = load(path)
@@ -166,10 +231,15 @@ jobs:
                   barcode = entry.get("barcode")
                   if isinstance(barcode, str):
                       if barcode in barcodes:
-                          fail(where, f"duplicate barcode {barcode}, already defined at {barcodes[barcode]}. "
-                                      "Add a markets: record to the existing entry instead.")
+                          first_path, first_index = barcodes[barcode]
+                          detail = (f"already defined at entry {first_index} of this same file"
+                                    if first_path == path
+                                    else f"already defined in {first_path}, at entry {first_index}")
+                          fail(where, f"duplicate barcode {barcode}: {detail}. A barcode may appear "
+                                      "only once across all of products/, whatever file it is filed "
+                                      "in - add a markets: record to the existing entry instead.")
                       else:
-                          barcodes[barcode] = where
+                          barcodes[barcode] = (path, index)
                   brand = entry.get("brand")
                   if isinstance(brand, str) and brand not in brands:
                       fail(where, f"brand {brand} does not exist in brands/")
@@ -187,6 +257,9 @@ jobs:
                       operator = market_record.get("operator")
                       if isinstance(operator, str) and operator not in entities:
                           fail(where, f"market {market}: operator {operator} does not exist in entities/")
+                      placer = market_record.get("placed_on_market_by")
+                      if isinstance(placer, str) and placer not in entities:
+                          fail(where, f"market {market}: placed_on_market_by {placer} does not exist in entities/")
 
           counts = f"{len(entities)} entities, {len(brands)} brands, {len(barcodes)} product overrides"
           if errors:

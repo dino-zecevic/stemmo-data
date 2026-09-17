@@ -1,0 +1,50 @@
+# Register extract, checked 2026-09-16: MBS 64-01-0004-17, JIB 4281104300000,
+#   naziv skraćeno VIOLETA d.o.o. GRUDE, Adresa Grude, Stjepana Radića 21,
+#   status nije u stečaju/likvidaciji. The register address matches the producer
+#   address on the pack.
+# Legal name is the register's; the pack prints the short trading form
+#   "Violeta d.o.o.".
+#
+# FORMER NAME AND SEAT — TOMISLAVGRAD. Evidenced by a foreign register. The
+#   Croatian business register (sudreg.pravosudje.hr) lists this company as a
+#   member of the Croatian VIOLETA d.o.o., identifying it by its BiH
+#   registration number 64-01-0004-17, JIB 4281104300000 and OIB 28271477805.
+#   The same Croatian register's capital history names VIOLETA d.o.o. za
+#   proizvodnju i trgovinu TOMISLAVGRAD, Kolo bb, under the identical
+#   OIB 28271477805. So Tomislavgrad and Grude are one legal entity after a
+#   change of seat and name. That is what makes the trade mark cited in
+#   brands/teta-violeta.yaml — filed from the Tomislavgrad address —
+#   attributable to this company.
+#
+# GLEIF, checked 2026-09-16:
+#   search "VIOLETA", country filter BA  -> no records
+#   Only one query. The two-query rule in EDITORIAL-POLICY.md asks for a shorter
+#   distinctive fragment alongside the full name, and "VIOLETA" is already the
+#   distinctive part — the rest of the legal name is the legal form and the
+#   line of business. There is no shorter useful form to try, so the single
+#   query is the whole of what the rule can ask for here.
+#
+# parent: not established — the BiH basic extract carries no founder field, and
+#   the Croatian register tells us what this company owns, not who owns it.
+#
+# THE CROATIAN ENTITY NOW EXISTS: entities/violeta-doo-hr.yaml
+#   (e_violeta_hr, VIOLETA d.o.o. za proizvodnju, trgovinu i usluge, MBS
+#   030082703, Sveti Ivan Zelina). The note that stood here, saying it had not
+#   been created because nothing referenced it, is superseded.
+#   That register extract names THIS company as one of its two members,
+#   identified by MBS 64-01-0004-17, JIB 4281104300000 and OIB 28271477805 —
+#   the same OIB that ties this company to its former Tomislavgrad seat above.
+#   The membership is recorded on the Croatian record, which is where the
+#   source is. No parent is written there; the reason is set out in that file.
+#   The open LEI question moved with it and is restated there too.
+
+id: e_violeta_ba
+name: VIOLETA d.o.o. za proizvodnju i trgovinu GRUDE
+country: BA
+registry_id: "64-01-0004-17"      # MBS
+
+sources:
+  - "BA/bizreg: MBS 64-01-0004-17"
+  - "label text: Proizvođač: Violeta d.o.o., Stjepana Radića 21, 88340 Grude, BiH"
+
+verified_on: 2026-09-16

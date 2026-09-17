@@ -1,0 +1,42 @@
+# THE FILENAME IS A FILING CONVENTION. IT IS NOT A COUNTRY.
+#
+# Entries live in the file named after the first three digits of the barcode as
+# written in the record. That is all the filename means.
+#
+# Those digits record which GS1 member organisation issued the number. They say
+# nothing about where the product was made, who made it, or where the company is
+# registered, and EDITORIAL-POLICY.md forbids drawing any such conclusion from
+# them. Read the markets: records for origin; read nothing into this filename.
+#
+# The convention exists because it sorts the records and keeps two contributors
+# working on different products out of the same file. Nothing more.
+#
+# See products/README.md for what these records are and how they are shaped.
+
+- barcode: "3873508991982"
+  name: Bingo domaće mlijeko 2,0% m.m. 1L
+  brand: b_bingo
+
+  markets:
+    - market: BA
+      made_in: BA
+      operator: e_mi99                  # runs the plant
+      placed_on_market_by: e_bingo      # retailer, own-brand
+      sources:
+        - "label text: Za Bingo, d.o.o. Tuzla proizvodi: Mliječna industrija 99 d.o.o., ul. Sarajevska 126, 76 250, Gradačac"
+        - "label text: Zemlja porijekla: Bosna i Hercegovina"
+        - "label text: Na tržište BiH stavlja: Bingo doo Tuzla"
+      verified_on: 2026-09-15
+
+- barcode: "3870128012806"
+  name: Teta Violeta Fresh Glass Cleaner 750 ml
+  brand: b_teta_violeta
+
+  markets:
+    - market: BA
+      made_in: BA
+      operator: e_violeta_ba
+      sources:
+        - "label text: Zemlja porijekla: Bosna i Hercegovina"
+        - "label text: Proizvođač: Violeta d.o.o., Stjepana Radića 21, 88340 Grude, BiH"
+      verified_on: 2026-09-16

@@ -1,0 +1,17 @@
+# Register extract, checked 2026-09-15: MBS 64-01-0013-10, JIB 4272063520009,
+#   Naziv DŽAJIĆ-COMMERCE d.o.o. Ljubuški, Adresa Ljubuški, Ljubuški,
+#   A.G. Matoša 22, Pregrađe, status nije u stečaju/likvidaciji.
+#   Register address matches the importer address on the carton.
+# Legal name is the register's; the carton prints "Džajić-Commerce d.o.o.".
+# parent: not established — see EDITORIAL-POLICY.md
+
+id: e_dzajic
+name: DŽAJIĆ-COMMERCE d.o.o. Ljubuški
+country: BA
+registry_id: "64-01-0013-10"      # MBS
+
+sources:
+  - "BA/bizreg: MBS 64-01-0013-10"
+  - "label text: Uvoznik i distributer za BiH: Džajić-Commerce d.o.o., A.G. Matoša 22, 88320 Ljubuški, BiH"
+
+verified_on: 2026-09-15

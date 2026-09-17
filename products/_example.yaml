@@ -1,0 +1,34 @@
+# THE TEMPLATE ENTRY. Nothing in this file is a record.
+#
+# This file sits outside the prefix filing convention on purpose. Real entries
+# live in a file named after the first three digits of their barcode — see
+# products/README.md — and that name is a filing convention and nothing else:
+# those digits record which GS1 member organisation issued the number, never
+# where a product was made or who made it.
+#
+# EXAMPLE ENTRY — this barcode, product and company do not exist.
+# Copy it into the prefix file its real barcode belongs in, replace every value,
+# and drop the example: true flag along with this header.
+
+- barcode: "9990007654324"        # quoted: a barcode is a string, leading zeros matter
+  name: Example Brand Sparkling Water 500 ml   # market-invariant; required if nothing else records this product
+  brand: b_example_brand          # market-invariant, so it sits here too
+
+  markets:
+    # One record per country the product is sold in. Add a second record rather
+    # than editing this one when you find the same barcode bottled elsewhere.
+    - market: GB                  # where the product was BOUGHT
+      made_in: GB                 # where the label says it was MADE
+      operator: e_example_holding_ltd   # entity running the plant
+      sources:
+        - "label text: Bottled by Example Holding Ltd, Unit 1, Example Way"
+      verified_on: 2026-09-15
+
+    - market: IE
+      made_in: GB                 # sold in Ireland, bottled in Great Britain
+      operator: e_example_holding_ltd
+      sources:
+        - "label text: Produced in Great Britain for Example Holding Ltd"
+      verified_on: 2026-09-15
+
+  example: true

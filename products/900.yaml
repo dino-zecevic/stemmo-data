@@ -1,0 +1,29 @@
+# THE FILENAME IS A FILING CONVENTION. IT IS NOT A COUNTRY.
+#
+# Entries live in the file named after the first three digits of the barcode as
+# written in the record. That is all the filename means.
+#
+# Those digits record which GS1 member organisation issued the number. They say
+# nothing about where the product was made, who made it, or where the company is
+# registered, and EDITORIAL-POLICY.md forbids drawing any such conclusion from
+# them. Read the markets: records for origin; read nothing into this filename.
+#
+# The convention exists because it sorts the records and keeps two contributors
+# working on different products out of the same file. Nothing more.
+#
+# See products/README.md for what these records are and how they are shaped.
+
+- barcode: "9006900221690"
+  name: Pfanner Orange nektar 1 L
+  brand: b_pfanner
+
+  markets:
+    - market: BA
+      made_in: AT
+      operator: e_pfanner
+      placed_on_market_by: e_dzajic     # importer and distributor for BiH
+      sources:
+        - "label text: Mjesto porijekla: Austrija"
+        - "label text: Uvoznik i distributer za BiH: Džajić-Commerce d.o.o., A.G. Matoša 22, 88320 Ljubuški, BiH"
+        - "label text: Hermann Pfanner Getränke GmbH, 6923 Lauterach, Austria"
+      verified_on: 2026-09-15
