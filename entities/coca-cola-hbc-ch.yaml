@@ -1,0 +1,27 @@
+# GLEIF record, checked 2026-09-15: ACTIVE, FULLY_CORROBORATED, CONFORMING, last
+#   updated 2026-04-30. Legal name Coca-Cola HBC AG (de-CH); also Coca-Cola HBC
+#   SA (fr-CH), Coca-Cola HBC Ltd (en). Turmstrasse 26, 6312 Steinhausen, CH-ZG.
+#   Jurisdiction CH, registeredAs CHE-235.296.902.
+# Both nulls are sourced, not assumed — the first in this dataset that are a
+#   claim rather than a gap. GLEIF publishes a reporting exception for each,
+#   categories DIRECT_ and ULTIMATE_ACCOUNTING_CONSOLIDATION_PARENT, reason
+#   NON_CONSOLIDATING both times: nothing consolidates this entity, so it is the
+#   top of its chain. Why that is a null and not an exception: EDITORIAL-POLICY.md.
+# Establishes that Coca-Cola HBC AG is not a subsidiary of The Coca-Cola Company:
+#   the bottling chain and the brand chain do not join.
+
+id: e_cchbc_ag
+name: Coca-Cola HBC AG
+country: CH
+lei: 549300EFP3TNG7JGVE49
+registry_id: "CHE-235.296.902"
+
+parent: null
+ultimate_parent: null
+
+sources:
+  - https://api.gleif.org/api/v1/lei-records/549300EFP3TNG7JGVE49
+  - https://api.gleif.org/api/v1/lei-records/549300EFP3TNG7JGVE49/direct-parent-reporting-exception
+  - https://api.gleif.org/api/v1/lei-records/549300EFP3TNG7JGVE49/ultimate-parent-reporting-exception
+
+verified_on: 2026-09-16

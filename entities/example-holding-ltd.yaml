@@ -6,9 +6,41 @@ id: e_example_holding_ltd         # slug, prefix e_, lowercase, underscores
 name: Example Holding Ltd         # the exact registered legal name, legal form included
 country: GB                       # ISO 3166-1 alpha-2, country of REGISTRATION
 
-# parent: the entity that owns this one. null means this is the ultimate parent.
-# A subsidiary would instead read:  parent: e_example_holding_ltd
+# OWNERSHIP. Two independent fields, each with FOUR states. Read this before
+# filling either in; getting it wrong is the commonest error in a submission.
+#
+#   parent           the entity that DIRECTLY owns this one
+#   ultimate_parent  the entity at the TOP of the chain
+#
+# They are independent: both may be present, either may appear alone, and both
+# may be absent. Putting an ultimate parent in parent is an overclaim — it
+# asserts a direct holding the source did not establish — and review rejects it.
+#
+# The four states, for each field:
+#
+#   field absent          ownership has not been established. Nobody looked, or
+#                         looking found nothing. THIS IS THE DEFAULT. Delete the
+#                         field rather than guessing at it.
+#   field: e_some_entity  a source names the owner.
+#   field: null           a source CONFIRMS there is no owner above. This is a
+#                         positive claim, not the cautious option, and it needs
+#                         a source like any other. Never write null merely
+#                         because you found no parent — that is an absent field.
+#   field_exception: …    a source says an owner exists but does not disclose
+#                         it. Mutually exclusive with the field itself; CI
+#                         rejects both being set. Values are the GLEIF
+#                         reporting-exception reasons.
+#
+# See EDITORIAL-POLICY.md, "Ownership has four states, not two", for why the
+# distinctions matter and which exception reasons justify a null instead.
+
+# Sourced null: the GLEIF record below is what confirms nothing owns this
+# company. Without such a source this line would be deleted, not set to null.
 parent: null
+
+# ultimate_parent: e_example_parent_group    # the top of the chain, if different
+# parent_exception: NON_PUBLIC               # a direct owner exists, undisclosed
+# ultimate_parent_exception: NON_PUBLIC      # the top of the chain, undisclosed
 
 lei: EXAMPLE00000000LEI88         # optional. GLEIF Legal Entity Identifier, 20 characters
 registry_id: "00000000"           # optional. National register number, as the register prints it

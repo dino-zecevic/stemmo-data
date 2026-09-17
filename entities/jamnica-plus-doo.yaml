@@ -1,0 +1,43 @@
+# Register extract, checked 2026-09-16 via sudreg.pravosudje.hr: MBS 081180379,
+#   OIB 02233362849, sud TS Zagreb, status Aktivan, naziv status Aktivno,
+#   Adresa Pisarovina, Vladimira Nazora 57.
+# Legal name is the register's; the label prints the short trading form
+#   "Jamnica plus d.o.o.".
+#
+# TWO ADDRESSES, BOTH RECORDED AS FOUND AND NOT RECONCILED. The bottle and the
+#   Croatian register both give Vladimira Nazora 57, Pisarovina — the production
+#   site. The WIPO trade mark record cited in brands/jana.yaml gives Getaldićeva
+#   3, Zagreb. Same company, different addresses, most likely a registered
+#   office and a plant. No address is a field on this record, so nothing turns
+#   on it; the discrepancy is noted so the next person does not read it as an
+#   error.
+#
+# GLEIF, checked 2026-09-16. Two queries, both reproducible:
+#   search "JAMNICA plus", country filter HR  -> no records
+#   search "JAMNICA",      country filter HR  -> 1 record, a different company
+#   The narrow query on this company's own name returns nothing, so no LEI is
+#   recorded. The broad query is what turns up the record below.
+#
+# DO NOT ATTACH LEI 74780000F06H8UWC7I70 TO THIS RECORD. The single record
+#   returned by search "JAMNICA" in HR is a DIFFERENT company: JAMNICA dioničko
+#   društvo za proizvodnju mineralnih voda, LEI 74780000F06H8UWC7I70,
+#   MBS 080001412, Getaldićeva 3, Zagreb — a d.d. where the bottle names a
+#   d.o.o., at a different address, with registrationStatus RETIRED and
+#   entityStatus INACTIVE. Almost certainly a predecessor entity from a
+#   restructuring. It is not this company, and no LEI is recorded here. Anyone
+#   revisiting this should search on the full legal name rather than on
+#   "Jamnica".
+#
+# parent: not established — no LEI, so GLEIF has nothing on this company, and
+#   the sudreg basic search result carries no ownership field.
+
+id: e_jamnica_plus
+name: JAMNICA plus društvo s ograničenom odgovornošću za proizvodnju
+country: HR
+registry_id: "081180379"          # MBS
+
+sources:
+  - "HR/sudreg: MBS 081180379, OIB 02233362849"
+  - "label text: Proizvodi i puni: Jamnica plus d.o.o., Vladimira Nazora 57, 10451 Pisarovina, Hrvatska"
+
+verified_on: 2026-09-16

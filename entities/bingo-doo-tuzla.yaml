@@ -1,0 +1,16 @@
+# Register extract, checked 2026-09-15: MBS 1-5356, JIB 4209253450003,
+#   Naziv "BINGO" d.o.o. export-import Tuzla.
+#   Supplied by the maintainer's own lookup; not re-verified against bizreg here.
+# Legal name is the register's; the carton prints the trading form "Bingo doo Tuzla".
+# parent: not established — see EDITORIAL-POLICY.md
+
+id: e_bingo
+name: '"BINGO" d.o.o. export-import Tuzla'
+country: BA
+registry_id: "1-5356"             # MBS
+
+sources:
+  - "BA/bizreg: MBS 1-5356"
+  - "label text: Na tržište BiH stavlja: Bingo doo Tuzla, ul. Bosanska poljana bb, 75000 Tuzla, Bosna i Hercegovina"
+
+verified_on: 2026-09-15
