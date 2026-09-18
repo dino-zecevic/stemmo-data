@@ -27,12 +27,24 @@ with a source for each crossing.
 
 That is what this repository is: that mapping, curated by hand, with sources.
 
+### No public product database supplies any of this
+
+Open Food Facts was a pipeline source and is now disabled by default in
+stemmo-pipeline. The reason has nothing to do with licensing. Its brand strings
+are contributor-typed free text, carrying none of the citable source and none of
+the `verified_on` date every record here carries — and in practice the products
+it contributed matched no curated brand and were discarded anyway.
+
+So nothing upstream supplies a product that this dataset does not record itself.
+Every entry in `products/` is the sole record of that product, which is what
+[What a product record is](#what-a-product-record-is) is about.
+
 ## Structure
 
 ```
 entities/     one file per legal company        ids prefixed e_
 brands/       one file per brand name           ids prefixed b_
-products/     barcode-level corrections         keyed by barcode and market
+products/     product records                   keyed by barcode and market
 schema/       JSON Schema for each of the three
 ```
 
@@ -108,12 +120,16 @@ its own for an entity or brand record.
 
 ### Product override
 
-Corrects or supplies product-level facts, and is keyed by barcode **and market**.
+Records product-level facts, and is keyed by barcode **and market**.
+
+The name is historical: there is no public product database in the pipeline, so
+an entry overrides nothing. It is the record — see
+[What a product record is](#what-a-product-record-is).
 
 | Field | Required | Notes |
 |---|---|---|
 | `barcode` | yes | EAN/UPC as a string |
-| `name` | no | product name, max 200 characters — market-invariant. Optional when correcting a product a public database already carries; needed when this override is the only record of the product |
+| `name` | no | product name, max 200 characters — market-invariant. Optional in the schema, required in practice: this is the only record of the product, so without a name there is nothing to display |
 | `brand` | no | brand id — market-invariant |
 | `markets` | no | list of per-market records |
 
@@ -187,27 +203,26 @@ lists, so downstream a barcode's file of origin is invisible, and the validator
 deliberately does **not** check that a barcode matches the file it sits in.
 Enforcing that would make the convention load-bearing.
 
-## What an override is for
+## What a product record is
 
-An entry in `products/` does one of two distinct jobs, and it is worth being
-clear about which, because they have different requirements.
+An entry in `products/` is **the only record of that product there is.**
 
-**1. Correcting a record that already exists.** A public product database
-carries the barcode, but its brand is wrong, spelled in a way nothing matches,
-or attributed to the wrong company. The override supplies the corrected fields.
-The product's name already exists upstream, so `name` can be left out.
+No public product database feeds this dataset, so an entry has nothing upstream
+to correct and nothing upstream to fall back on. A barcode is either recorded
+here — with a name, a brand, and per-market records each carrying a source and a
+date — or it is not recorded anywhere. A regional line, a shop's own label, a
+product that never got entered into anything: these are not the unusual case
+here, they are the whole of the directory.
 
-**2. Supplying a record that exists nowhere else.** The barcode is in no public
-product database at all — a regional line, a shop's own label, a product that
-simply never got entered. Here the override is not a correction of anything. It
-is the only record of that product in existence, and if it does not carry a
-`name`, there is nothing for anything downstream to display. In this case `name`
-is required in practice, even though the schema marks it optional.
+The one practical consequence is about `name`. **The schema marks `name`
+optional, and it stays optional**, so that the door is open if a product source
+is ever added. But a record without one has nothing for a consumer to display:
+a barcode with no name attached is not a usable record of a product. So in
+practice every entry carries a `name`, and one that does not is incomplete
+rather than merely terse.
 
-Downstream builds take **the union** of public product data and the barcodes
-recorded only here: every barcode the public data covers, plus every barcode
-that appears solely in this directory. An override-only entry is therefore not a
-second-class record. For the products in case 2, it is the record.
+Entries here are not patches over someone else's data, and not second-class
+records. For every product in this directory, this is the record.
 
 ## Why product overrides are keyed by market
 
@@ -366,65 +381,132 @@ own file, `_example.yaml`, outside the prefix filing convention.
 
 ## Licence
 
-**The curated data in this repository is CC0. Files generated downstream by
-combining it with Open Food Facts are ODbL, because ODbL is share-alike.**
+**This data is [ODbL-1.0](LICENSE), and so is anything generated from it.**
 
-The curated data in this repository is released under
-[CC0 1.0 Universal](LICENSE) — public domain dedication. Anyone may use it for
-anything, including in a closed commercial product, with no attribution required.
+Anyone may use it, for anything, including commercially. Two things come with
+that:
 
-Files generated **downstream** by combining this data with
-[Open Food Facts](https://world.openfoodfacts.org/) are a different matter. Open
-Food Facts is licensed under the
-[ODbL](https://opendatacommons.org/licenses/odbl/), which is share-alike, so a
-derived database that mixes the two is ODbL and must be distributed as such.
-CC0 here does not and cannot relax that.
+- **Credit the source.** Say where the data came from, and that it is ODbL.
+- **A derived database stays open.** If you publish a database derived from this
+  one, that database must also be ODbL.
 
-In short: this repository is CC0. Generated shard files that include Open Food
-Facts data are ODbL.
+**Using this data in a closed application is permitted.** Share-alike applies to
+a derived database, not to an application that queries one, so an app that reads
+this data does not have to open its own source. What it may not do is publish a
+closed database built out of it.
 
-[LICENSE](LICENSE) is the full, unmodified CC0 1.0 Universal legal code as
-published by Creative Commons.
+Files generated downstream are ODbL because **this dataset is ODbL** — full
+stop. The licence is not derived from the licence of any source the pipeline
+reads, and nothing generated downstream takes its terms from somewhere else.
+That holds whether or not another source is ever added, since a share-alike
+source would impose the same terms anyway.
+
+[LICENSE](LICENSE) is the full, unmodified ODbL 1.0 legal code as published by
+[Open Data Commons](https://opendatacommons.org/licenses/odbl/1-0/).
+
+### The licence changed from CC0
+
+This dataset was CC0 when it was first published, and was relicensed to ODbL-1.0
+before it had any outside contributors. The reason, in one line: the data is free
+and should stay free, and a derived database being closed defeats the point of
+publishing it.
+
+The change is clean. There is one commit under CC0 — a6b982f, which added the
+CC0 licence file — together with the pull request merged over it (eb4d420, merge
+commit 01c3239), all of it the maintainer's own work. Nothing outside this
+repository has consumed that data, and there are no outside contributors whose
+consent would be needed.
 
 ## Consumers
 
 A mobile app consumes this data. The dataset is maintained to stand on its own,
 and is useful without it.
 
-## What the first four products cost
+## Identity is cheap; ownership is scarce
 
 Recorded because it is the most useful thing learned so far, and because it bears
-directly on what this dataset can currently claim to be.
+directly on what this dataset can currently claim to be. Every number below is
+counted from the files in this repository, excluding the seeded `example: true`
+templates in each directory.
 
-Four real products produced eight entities and three brands. Every one of them is
-sourced.
+Seven curated products produced eleven entities and six brands. Every one of them
+is sourced, and identity — legal name, country of registration, register
+identifier — was established for all eleven entities.
 
-Ownership was attempted for three corporate groups. Four entities carry an LEI,
-and each has two ownership fields — direct and ultimate — so there are eight
-results to account for:
+Ten of the eleven are reachable from the seven packages, as a brand owner, a
+plant operator, or the party placing the product on a market. The eleventh,
+`e_violeta_hr`, arrived from a register lookup while another producer was being
+checked, and no product record references it. Two of the eleven — `e_dzajic` and
+`e_sarajevski_kiseljak` — exist solely because `placed_on_market_by` has a field
+for the importer named on the back of a package.
 
-| Outcome | Count | Where |
+Ownership is the part that did not come.
+
+### The ownership tally, counted per field
+
+Eleven entities, each with two independent ownership fields, direct and ultimate,
+so there are twenty-two results to account for. Counting per field rather than
+per entity is the only honest way to do it: an entity whose direct parent is
+withheld and whose ultimate parent is sourced is not half a result, it is two
+different ones.
+
+| Outcome | Fields | Where |
 |---|---|---|
 | Edge established | 1 | `e_cchbc_bh` → `e_cchbc_ag`, ultimate parent, in force since 2017 |
-| Sourced `null` | 2 | `e_cchbc_ag`, both fields, via `NON_CONSOLIDATING` |
-| Exception | 5 | `e_cchbc_bh` direct and both of `e_pfanner`'s, all `NON_PUBLIC`; both of `e_tccc`'s, `NO_KNOWN_PERSON` |
+| Sourced `null` | 4 | `e_cchbc_ag`, both fields, via `NON_CONSOLIDATING`; `e_bingo`, both fields, via `NATURAL_PERSONS` |
+| Exception | 5 | `e_cchbc_bh` direct, and both of `e_pfanner`'s, all `NON_PUBLIC`; both of `e_tccc`'s, `NO_KNOWN_PERSON` |
+| Not established | 12 | both fields of all six entities that carry no LEI |
 
-One edge. One entity whose position at the top of its chain is sourced, on both
-fields. Five fields where a source was found, read, and did not answer the
-question.
+One edge out of twenty-two fields. Four fields where the end of a chain is a
+sourced claim, on two entities that terminate for two different reasons — one
+because nothing consolidates it, one because its owners are individuals. Five
+where a source was found, read, and did not answer the question. Twelve where
+nothing consulted spoke at all.
+
+**The split falls exactly on the LEI line.** The five entities that carry an LEI
+have all ten of their ownership fields answered — as an edge, a `null`, or an
+exception. The six that do not have all twelve of theirs absent. No record on
+either side of that line breaks it.
+
+That line has now been tested once rather than merely observed. `e_bingo` sat on
+the wrong side of it for want of a query: the record claimed no LEI without one
+ever having been run. Running it produced a match, and the entity moved across
+the line intact — gaining an LEI and, with it, both of its ownership fields. The
+line held, but only because the gap was closed; an unchecked "no LEI" is not
+evidence of one.
+
+**Having an LEI is not a uniform good, either.** The five records differ sharply
+in condition:
+
+| Entity | Status | Corroboration | Last updated |
+|---|---|---|---|
+| `e_cchbc_ag` | ACTIVE | FULLY_CORROBORATED | 2026-04-30 |
+| `e_tccc` | ACTIVE | FULLY_CORROBORATED | 2026-03-04 |
+| `e_pfanner` | ACTIVE | FULLY_CORROBORATED | 2025-10-30 |
+| `e_cchbc_bh` | ACTIVE | PARTIALLY_CORROBORATED | 2026-04-16 |
+| `e_bingo` | LAPSED | ENTITY_SUPPLIED_ONLY | 2023-09-27 |
+
+The weakest of the five is the one belonging to a company of the kind this
+dataset exists to record — a regional retailer rather than a multinational
+bottler. Its LEI is unmaintained since 2023 and was never checked against a
+register by anyone. Both of its nulls are recorded anyway, with the flags stated
+on the record, because for ownership there is no better source available: no
+Bosnian register publishes ownership at all, so a company's own statement about
+its owners is the best obtainable. That is a real claim resting on a weak record,
+and it is written down as such rather than quietly upgraded or quietly dropped.
 
 ### Identity and ownership come from different places
 
-**National registers publish identity and mostly not ownership.** Four basic
+**National registers publish identity and mostly not ownership.** Six basic
 bizreg extracts gave legal names, MBS, JIB, addresses and status, and carried no
-ownership field at all. An Austrian imprint gave the Firmenbuch number, the court
+founder field at all. An Austrian imprint gave the Firmenbuch number, the court
 and the VAT number, and named the company without naming its owners. An SEC
 subsidiary exhibit listed what the filer owns as of 2008 and said nothing about
 who owns the filer.
 
-**GLEIF publishes ownership, but only for entities that have an LEI** — and most
-of those did not answer. Five of the eight results were exceptions rather than
-relationships.
+**GLEIF publishes ownership, but only for entities that have an LEI** — and half
+of those did not answer. Five of the ten LEI-holder fields came back as
+exceptions rather than relationships.
 
 An exception is not a failed lookup. `NON_PUBLIC` is a company stating that an
 owner exists and is not published; `NO_KNOWN_PERSON` is a company reporting the
@@ -432,10 +514,13 @@ limit of its own knowledge. Both are facts worth recording, and neither is
 surfaced by any competing product. But neither is an edge, and a graph cannot be
 built from them.
 
-Four of the seven curated entities carry an LEI. The other three have none, and
-nothing else consulted for them carried ownership at all.
+The reverse case is worth knowing too, because two records rest on it.
+`e_cchbc_ag`'s Swiss UID and `e_tccc`'s Delaware file number are GLEIF's
+`registeredAs` values, not the product of a lookup in either register. Those are
+the two entities here whose register identifier has never been read from the
+register that issued it.
 
-### One national register does publish ownership
+### One national register does publish ownership — and the schema could not take the answer
 
 The claim above — that national registers publish identity and mostly not
 ownership — has an exception, found while recording a Croatian producer.
@@ -448,7 +533,7 @@ branch records. In the case that turned this up, that was enough to establish
 that a company had changed both its seat and its name — a fact no single extract
 stated, reconstructed from the identifier carried through the capital history.
 
-This is the first register in this dataset that answers the ownership question at
+It is the only register in this dataset that answers the ownership question at
 all. Set against what the others do:
 
 | Source | Answers ownership? |
@@ -458,13 +543,26 @@ all. Set against what the others do:
 | GLEIF | only for LEI holders, and about accounting consolidation rather than membership |
 | HR sudreg | yes — members, with identifiers, from the same lookup as identity |
 
-The consequence is about cost, and it is uneven. For a Croatian company an
-ownership edge is cheap: it arrives from the same free lookup as the legal name,
-with no LEI required and nothing to pay for. For a Bosnian company it remains
-unavailable from the basic extract at any price this project has found. So the
-cost of an ownership edge is jurisdiction-dependent, and a coverage estimate has
-to be made per country. An aggregate figure over a mixed set of countries would
-average together two situations that have nothing to do with each other.
+**It has since answered, and the dataset still gained no edge from it.** The
+second sudreg lookup, for `entities/violeta-doo-hr.yaml`, names two members of
+that company: `e_violeta_ba`, matched on three register identifiers, and one
+natural person, who is not recorded. The extract publishes no shares. So that
+record carries no ownership field at all — `parent` and `ultimate_parent` would
+each assert sole or controlling ownership the source does not establish — and the
+membership is stated in its comments instead. That is the README's open question
+about several members, live in the data.
+
+So a register publishing ownership is necessary and not sufficient. The cost of
+an edge has a second component: the answer has to be one the schema can carry,
+and this one was not.
+
+The first component is about money and is uneven by jurisdiction. For a Croatian
+company an ownership answer is cheap — it arrives from the same free lookup as
+the legal name, with no LEI required and nothing to pay for. For a Bosnian
+company it remains unavailable from the basic extract at any price this project
+has found. A coverage estimate therefore has to be made per country; an aggregate
+figure over a mixed set of countries would average together two situations that
+have nothing to do with each other.
 
 **This is one register, and nothing more general follows from it.** It is not
 evidence that EU registers publish ownership, or that any other register does.
@@ -472,8 +570,8 @@ Each one has to be checked on its own terms.
 
 ### The two chains do not terminate the same way
 
-The bottling chain and the brand chain both run out of this dataset's four
-products, and only one of them can be followed to its end.
+The bottling chain and the brand chain both run out of the packages recorded
+here, and only one of them can be followed to its end.
 
 | Chain | Ends at | How |
 |---|---|---|
@@ -497,17 +595,62 @@ more countries than that. The Bosnian entity that names it as its ultimate paren
 
 The relationship is published from one end only. So ownership has to be resolved
 per entity, upward from the company on the package, and there is no one-call
-shortcut that enumerates a group and fills in its members.
+shortcut that enumerates a group and fills in its members. Exactly one entity
+here, `e_cchbc_ag`, exists because that upward walk had somewhere to go.
+
+### The brand side rests on trademark registers, and two of its citations are expiring
+
+Six brands, and the sourcing splits:
+
+| Brand | Source | Form of mark |
+|---|---|---|
+| `b_bingo` | BA/IIP-BIH 1417973 | word mark |
+| `b_violeta` | BA/IIP-BIH 1619857 | combined |
+| `b_teta_violeta` | BA/IIP-BIH 1619510 | combined |
+| `b_jana` | WO/WIPO 1781398 | figurative |
+| `b_coca_cola` | the owner's own brands page | no mark cited |
+| `b_pfanner` | the owner's own website | no mark cited |
+
+Four of the six rest on a trademark register, and only one of those four is a
+word mark — the citation that covers the name itself rather than a picture of it.
+The remaining two rest on a company saying so on its own site, which ties a brand
+to an entity without any register confirming the trademark.
+
+Register citations also decay on a schedule, which register extracts of a legal
+name do not. `b_teta_violeta`'s registration shows an expiry of 2026-05-20, which
+has passed with no renewal recorded in TMview; `b_violeta`'s expires 2026-11-18,
+about two months after it was recorded. Neither means the company stopped owning
+the mark — TMview is not an official register and says so itself — but both mean
+the citation is weaker than a live one, and the IIP-BIH register that would
+settle it has not been consulted.
 
 ### What this does not establish
 
-Three groups is not a sample, and no coverage estimate should be drawn from it.
-All three are beverage companies; one is listed and regulated, which is the most
-favourable case for LEI coverage available. The open question is what fraction of
-the entities this dataset actually cares about — retailers, contract dairies,
-regional importers — have an LEI at all, and how many of those disclose. Neither
-number is known.
+Ownership produced a result for five corporate groups: four through GLEIF — the
+Coca-Cola bottler, the Coca-Cola brand owner, Pfanner, and Bingo — and one
+through the Croatian register, where the answer could not be written into a
+field. Five groups is not a sample, and no coverage estimate should be drawn from
+it. All five are beverage, household-goods or grocery companies, and one is
+listed and regulated, which is the most favourable case for LEI coverage
+available.
 
+The question the earlier version of this section left open — what fraction of the
+entities this dataset actually cares about have an LEI at all — now has a first
+indication rather than none, and it is not the flat no it looked like before the
+queries were run. A Bosnian regional retailer, `e_bingo`, turned out to have one,
+and it answered both ownership fields. The six entities that have none are a
+contract dairy (`e_mi99`), two regional importers (`e_dzajic`,
+`e_sarajevski_kiseljak`) and three producers (`e_jamnica_plus`, `e_violeta_ba`,
+`e_violeta_hr`), each of them now carrying the queries that establish the
+negative.
+
+So: of the seven regional companies here — the retailer, the dairy, the two
+importers and the three producers — exactly one is in GLEIF, and its record is
+lapsed. Seven companies is not a sample, and how many would disclose an owner if
+they had an LEI remains unknown. What the exercise does establish is narrower and
+worth keeping: a company of this size having no LEI is a claim that has to be
+checked rather than assumed, because on the one occasion it was actually checked
+it was wrong.
 ## Open questions
 
 Recorded here so they are not silently forgotten. None are decided.

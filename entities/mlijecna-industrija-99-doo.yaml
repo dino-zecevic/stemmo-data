@@ -4,7 +4,27 @@
 #   status nije u stečaju/likvidaciji.
 # Register address is Sarajevska bb (bez broja); the carton prints Sarajevska 126.
 # Legal name is the register's; the carton prints "Mliječna industrija 99 d.o.o.".
-# parent: not established — see EDITORIAL-POLICY.md
+#
+# GLEIF, checked 2026-09-18. Five queries, all reproducible, all empty:
+#   search "Mliječna industrija 99 d.o.o. Gradačac",  country filter BA  -> no records
+#   search "Mliječna industrija 99",                  country filter BA  -> no records
+#   search "Mliječna industrija",                     country filter BA  -> no records
+#   search "Mljecna industrija",                      country filter BA  -> no records
+#   search "mi99",                                    country filter BA  -> no records
+#   search "Mljecna industrija",                     country filter BA -> no records
+#   search "mi99",                                   country filter BA -> no records
+#   The first two are the full legal name and its distinctive fragment, which is
+#   what the two-query rule asks for. The third drops the 99 in case the number
+#   is written differently; the fourth is the ASCII fold, because GLEIF
+#   normalises diacritics inconsistently and a name with č in it can sit in it
+#   without one; the fifth is the register's own short form, "mi99" d.o.o.
+#   Gradačac. Every one returned nothing, so there is no near-miss to state and
+#   reject.
+#   No LEI is recorded. GLEIF is therefore not a possible ownership source for
+#   this company, and nothing else consulted for it carries ownership either.
+#
+# parent: not established — absent for want of any source, not for want of
+#   looking. See EDITORIAL-POLICY.md
 
 id: e_mi99
 name: '"Mliječna industrija 99" d.o.o. Gradačac'
@@ -15,4 +35,4 @@ sources:
   - "BA/bizreg: MBS 32-01-0153-11"
   - "label text: Mliječna industrija 99 d.o.o., ul. Sarajevska 126, 76 250, Gradačac, Bosna i Hercegovina"
 
-verified_on: 2026-09-15
+verified_on: 2026-09-18

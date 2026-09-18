@@ -11,7 +11,7 @@
 # and drop the example: true flag along with this header.
 
 - barcode: "9990007654324"        # quoted: a barcode is a string, leading zeros matter
-  name: Example Brand Sparkling Water 500 ml   # market-invariant; required if nothing else records this product
+  name: Example Brand Sparkling Water 500 ml   # market-invariant; required in practice — nothing else records this product
   brand: b_example_brand          # market-invariant, so it sits here too
 
   markets:
