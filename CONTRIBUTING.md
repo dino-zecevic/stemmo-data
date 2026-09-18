@@ -102,7 +102,7 @@ field.
 ```
 entities/   one file per legal company    id starts with e_
 brands/     one file per brand name       id starts with b_
-products/   barcode-level corrections     keyed by barcode AND market
+products/   product records               keyed by barcode AND market
 ```
 
 `entities/` and `brands/` are one record per file. `products/` is lists, split
@@ -333,21 +333,17 @@ breaks the first one.
 
 ## Adding a product override
 
-An entry in `products/` does one of two jobs, and which one it is changes what
-you must supply.
+**Your entry is the only record of that product there is.** No public product
+database feeds this dataset, so there is nothing upstream for your entry to
+correct and nothing upstream to fall back on — see [No public product database
+supplies any of this](README.md#no-public-product-database-supplies-any-of-this).
+A barcode is either recorded here or it is not recorded anywhere. ("Override" is
+a historical name; nothing is being overridden.)
 
-**Correcting a product that already exists.** A public product database carries
-the barcode, but the brand is wrong, unmatched, or attributed to the wrong
-company. You supply the corrected fields. The product's name already exists
-upstream, so `name` is optional here — leave it out unless the upstream name is
-itself wrong.
-
-**Supplying a product that exists nowhere else.** The barcode is in no public
-product database. Your entry is not a correction of anything; it is the only
-record of that product there is. **`name` is optional in the schema but required
-in practice here**, because without it nothing downstream has anything to
-display — the product would exist as a barcode with no name attached. A short,
-factual name as printed on the package:
+What follows from that is one thing you have to supply. **`name` is optional in
+the schema but required in practice**, because without it nothing downstream has
+anything to display — the product would exist as a barcode with no name
+attached. A short, factual name as printed on the package:
 
 ```yaml
 - barcode: "9990007654324"
@@ -583,6 +579,20 @@ request. It is the same list.
 
 Rejection is not a judgement about whether you are right. Sourced resubmissions
 are welcome.
+
+---
+
+## Licence
+
+This dataset is **[ODbL-1.0](LICENSE)**, and so is anything generated from it.
+By opening a pull request, or an issue containing data, you agree that your
+contribution is published under that licence.
+
+For anyone using the data: use it for anything, including commercially; credit
+the source; and if you publish a database derived from it, publish that database
+under ODbL too. Using the data inside a closed application is permitted —
+share-alike applies to a derived database, not to an application that queries
+one. The README says this in full under [Licence](README.md#licence).
 
 ---
 

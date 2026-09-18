@@ -260,9 +260,17 @@ What is not recorded, in any form, is **who they are**: no name, no identifier, 
 address, no date of birth, no shareholding, for any individual. Not in a field,
 not in a comment, not in a commit message, not in the README.
 
-GLEIF's `NATURAL_PERSONS` exception says exactly this and is the existing
-precedent: a company reporting that its owners are individuals, without naming
-them. A record whose chain ends in private hands is written the same way.
+GLEIF's `NATURAL_PERSONS` reporting exception says exactly this: a company
+reporting that its owners are individuals, without naming them. A record whose
+chain ends in private hands is written the same way.
+
+**Live in the data:** [`entities/bingo-doo-tuzla.yaml`](entities/bingo-doo-tuzla.yaml)
+is the first record here whose chain reaches individuals. Note how it is written.
+Both ownership fields are `null` — a sourced claim that the corporate chain ends
+— and **not** a `*_exception`, because `NATURAL_PERSONS` is a statement about
+ownership rather than about disclosure; see "Which reporting-exception reasons
+justify null" above. The fact that the chain ends in private hands is recorded.
+Nothing whatever about the individuals is.
 
 The rule is written once, in advance, rather than decided case by case, because
 the situation is not rare. Registers that publish ownership publish people: a
@@ -286,6 +294,24 @@ question in the README about how several members are represented at all — with
 the remainder ending in private ownership and no individual named. The corporate
 edge is a fact and is kept. The individual is not a gap in the record; not naming
 them is the record.
+
+## Licence: ODbL, and so is anything made from it
+
+This dataset is licensed under [ODbL-1.0](LICENSE). Anyone may use it, for
+anything, including commercially, on these terms: credit the source, and if they
+publish a database derived from it, publish that derived database under ODbL
+too. An application that queries the data is not itself a derived database, so a
+closed application is permitted; a closed derived database is not.
+
+Anything generated from this data is ODbL because **this dataset** is ODbL. The
+licence is not derived from the licence of any source a pipeline reads, and no
+argument about what some source permits changes the terms on the output. That
+holds whether or not another source is ever added, since a share-alike source
+would impose the same terms anyway.
+
+A contribution accepted into this repository is published under that licence.
+The dataset was CC0 when first published and was relicensed before it had any
+outside contributors; the README records the change and why.
 
 ## Rejection is not a judgement about truth
 

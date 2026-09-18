@@ -4,16 +4,18 @@ Product-level records, keyed by barcode.
 
 ## What these files are for
 
-Two different jobs, in one directory:
+One job: **being the ONLY record of a product.**
 
-1. **Correcting a product that a public product database already carries**,
-   where its brand or its manufacturer is wrong or missing.
-2. **Being the ONLY record of a product that no public database has at all.**
+No public product database feeds this dataset — see [No public product database
+supplies any of this](../README.md#no-public-product-database-supplies-any-of-this).
+So an entry here has nothing upstream to correct and nothing upstream to fall
+back on. A barcode is either recorded in this directory or it is not recorded
+anywhere.
 
-The second case is why `name` exists. When an entry here is the sole record of a
-product, nothing downstream has a name to display unless these files supply one.
-When correcting a product that a public database already carries, the name comes
-from there and can be left out.
+That is why `name` matters. Nothing downstream has a name to display unless
+these files supply one. The schema marks `name` optional and it stays optional,
+in case a product source is ever added — but an entry without a name has
+nothing for a consumer to display, so in practice every entry carries one.
 
 ## Which file an entry goes in
 

@@ -36,8 +36,8 @@ body:
       label: Product name on the package
       description: |
         The product name as printed, with size or variant if the package shows
-        one. Required if this barcode is in no public product database: the
-        record we create would otherwise have nothing to display.
+        one. Required: the record we create is the only record of this product
+        there is, and without a name it has nothing to display.
       placeholder: Brightwater Still Water 750 ml
     validations:
       required: true

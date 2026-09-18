@@ -3,7 +3,23 @@
 #   A.G. Matoša 22, Pregrađe, status nije u stečaju/likvidaciji.
 #   Register address matches the importer address on the carton.
 # Legal name is the register's; the carton prints "Džajić-Commerce d.o.o.".
-# parent: not established — see EDITORIAL-POLICY.md
+#
+# GLEIF, checked 2026-09-18. Four queries, all reproducible, all empty:
+#   search "DŽAJIĆ-COMMERCE d.o.o. Ljubuški", country filter BA  -> no records
+#   search "DŽAJIĆ-COMMERCE",                 country filter BA  -> no records
+#   search "DZAJIC-COMMERCE",                 country filter BA  -> no records
+#   search "Džajić",                          country filter BA  -> no records
+#   The first two are what the two-query rule asks for: the full legal name and
+#   the distinctive fragment of it. The other two are here because GLEIF
+#   normalises diacritics inconsistently, so a Bosnian name can sit in it under
+#   an ASCII fold — DZAJIC-COMMERCE tests exactly that, and the bare surname is
+#   the broadest term that is still about this company. Nothing came back from
+#   any of the four, so there is no near-miss to state and reject.
+#   No LEI is recorded. GLEIF is therefore not a possible ownership source for
+#   this company, and nothing else consulted for it carries ownership either.
+#
+# parent: not established — absent for want of any source, not for want of
+#   looking. See EDITORIAL-POLICY.md
 
 id: e_dzajic
 name: DŽAJIĆ-COMMERCE d.o.o. Ljubuški
@@ -14,4 +30,4 @@ sources:
   - "BA/bizreg: MBS 64-01-0013-10"
   - "label text: Uvoznik i distributer za BiH: Džajić-Commerce d.o.o., A.G. Matoša 22, 88320 Ljubuški, BiH"
 
-verified_on: 2026-09-15
+verified_on: 2026-09-18
