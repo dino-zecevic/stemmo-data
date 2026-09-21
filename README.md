@@ -698,6 +698,38 @@ Recorded here so they are not silently forgotten. None are decided.
 - Should `name` be allowed to vary by market? It is market-invariant today, so a
   product sold under a different name in different countries has nowhere to
   record the second name. No field has been added for this.
+- What does a sourced `null` mean beyond "the chain ends here"? Two of GLEIF's
+  reporting-exception reasons justify a `null` rather than an exception —
+  `NON_CONSOLIDATING`, nothing consolidates this entity, and `NATURAL_PERSONS`,
+  the owners are individuals — and both are written identically, as a bare
+  `parent: null`. The four sourced nulls here split two and two:
+  [`e_cchbc_ag`](entities/coca-cola-hbc-ch.yaml) terminates because nothing
+  consolidates it, [`e_bingo`](entities/bingo-doo-tuzla.yaml) because its owners
+  are people. Nothing in either record's fields says which.
+
+  The reason survives in the comments, and partly in `sources`: a cited
+  `…/direct-parent-reporting-exception` URL tells a reader the null came from a
+  GLEIF exception, though the reason itself is in what that endpoint returns and
+  not in the URL. Neither comments nor source strings are fields, so a consumer
+  reading the records as data sees two identical nulls.
+
+  Nothing shown is false as a result. `null` means what the four-state model says
+  it means — a source confirms there is no owner above — and it means exactly
+  that in both records. What is lost is specificity. A consumer can say "the
+  chain ends here" and cannot say "and above it are individuals", which is a
+  different and more useful fact about a company; nor can it tell a
+  GLEIF-sourced end of chain from one a curator asserted on some other source's
+  authority, because the records offer nothing to tell them apart by.
+
+  A possible remedy is a structured field recording the reason beside the null:
+  the mirror of `parent_exception`, carrying why the chain terminates rather than
+  why an owner is withheld. Any such field would have to settle what its values
+  are — GLEIF's vocabulary alone would leave a null sourced from a national
+  register with nothing to write — and would have to leave a consumer that
+  ignores it no worse off than today.
+
+  No field has been added, and the schema is unchanged. The question is recorded,
+  not decided.
 - How should a company with **several members** be recorded? **This one is not
   hypothetical: it is live in the data, at
   [`entities/violeta-doo-hr.yaml`](entities/violeta-doo-hr.yaml).** The schema
