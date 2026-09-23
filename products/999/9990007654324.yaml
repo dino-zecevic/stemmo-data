@@ -1,0 +1,20 @@
+barcode: "9990007654324"
+name: Example Brand Sparkling Water 500 ml
+brand: b_example_brand
+
+markets:
+  - market: GB
+    made_in: GB
+    operator: e_example_holding_ltd
+    sources:
+      - 'label text: Bottled by Example Holding Ltd, Unit 1, Example Way'
+    verified_on: 2026-09-15
+
+  - market: IE
+    made_in: GB
+    operator: e_example_holding_ltd
+    sources:
+      - 'label text: Produced in Great Britain for Example Holding Ltd'
+    verified_on: 2026-09-15
+
+example: true

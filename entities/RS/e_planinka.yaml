@@ -1,0 +1,11 @@
+id: e_planinka
+name: PLANINKA AD KURŠUMLIJA
+country: RS
+registry_id: "07108079"
+
+sources:
+  - 'RS/APR: matični broj 07108079, PIB 100622505'
+  - https://planinka.rs/prolom-voda/
+  - 'label text: Proizvodi i puni: AD "PLANINKA", Kosovska 44, 18430 Kuršumlija, Srbija'
+
+verified_on: 2026-09-23

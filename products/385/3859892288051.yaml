@@ -1,0 +1,12 @@
+barcode: "3859892288051"
+name: Violeta PREMIUM toaletni papir, 16 rolni
+brand: b_violeta
+
+markets:
+  - market: BA
+    made_in: BA
+    operator: e_violeta_ba
+    sources:
+      - 'label text: Zemlja porijekla: Bosna i Hercegovina'
+      - 'label text: Proizvođač: Violeta d.o.o., Stjepana Radića 21, 88340 Grude, BiH'
+    verified_on: 2026-09-17

@@ -1,0 +1,15 @@
+id: e_example_holding_ltd
+name: Example Holding Ltd
+country: GB
+lei: EXAMPLE00000000LEI88
+registry_id: "00000000"
+
+parent: null
+
+sources:
+  - https://example.com/register/company/00000000
+  - https://example.com/gleif/EXAMPLE00000000LEI88
+
+verified_on: 2026-09-15
+
+example: true

@@ -1,0 +1,14 @@
+barcode: "8600169600091"
+name: Prolom voda negazirana 0,75 L
+brand: b_prolom
+
+markets:
+  - market: BA
+    made_in: RS
+    operator: e_planinka
+    placed_on_market_by: e_old_gold_komerc
+    sources:
+      - 'label text: Proizvedeno u Srbiji'
+      - 'label text: Proizvodi i puni: AD "PLANINKA", Kosovska 44, 18430 Kuršumlija, Srbija'
+      - 'label text: Uvoznik za BiH: "OLD GOLD - KOMERC" d.o.o., 76311 Dvorovi-Bijeljina, Karađorđeva 9A'
+    verified_on: 2026-09-23

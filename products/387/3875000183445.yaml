@@ -1,0 +1,12 @@
+barcode: "3875000183445"
+name: Sarajevski kiseljak 1,5 L
+brand: b_sarajevski_kiseljak
+
+markets:
+  - market: BA
+    made_in: BA
+    operator: e_sarajevski_kiseljak
+    sources:
+      - 'label text: Proizvodi i puni: Sarajevski kiseljak d.o.o. Bosna i Hercegovina'
+      - 'label text: Zemlja porijekla: Bosna i Hercegovina'
+    verified_on: 2026-09-23

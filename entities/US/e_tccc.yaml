@@ -1,0 +1,19 @@
+id: e_tccc
+name: The Coca-Cola Company
+country: US
+lei: UWJKFUJFZ02DKWI3RY53
+registry_id: "88529"
+
+parent_exception: NO_KNOWN_PERSON
+ultimate_parent_exception: NO_KNOWN_PERSON
+
+sources:
+  - https://api.gleif.org/api/v1/lei-records/UWJKFUJFZ02DKWI3RY53
+  - https://api.gleif.org/api/v1/lei-records/UWJKFUJFZ02DKWI3RY53/direct-parent-reporting-exception
+  - https://api.gleif.org/api/v1/lei-records/UWJKFUJFZ02DKWI3RY53/ultimate-parent-reporting-exception
+  - https://www.sec.gov/Archives/edgar/data/21344/000104746909001875/a2190274zex-21_1.htm
+  - 'label text: © 2026 The Coca-Cola Company'
+
+notes: Probably the top of its chain, but GLEIF reports NO_KNOWN_PERSON; write null only with a source such as a current 10-K.
+
+verified_on: 2026-09-16

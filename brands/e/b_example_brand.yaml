@@ -1,0 +1,16 @@
+id: b_example_brand
+name: Example Brand
+aliases:
+  - ExampleBrand
+  - Example Brand Classic
+  - Example Brand Original
+
+brand_owner: e_example_holding_ltd
+
+sources:
+  - https://example.com/trademarks/example-brand
+  - https://example.com/about/our-brands
+
+verified_on: 2026-09-15
+
+example: true

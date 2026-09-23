@@ -1,0 +1,12 @@
+id: e_jamnica_plus
+name: JAMNICA plus društvo s ograničenom odgovornošću za proizvodnju
+country: HR
+registry_id: "081180379"
+
+sources:
+  - 'HR/sudreg: MBS 081180379, OIB 02233362849'
+  - 'label text: Proizvodi i puni: Jamnica plus d.o.o., Vladimira Nazora 57, 10451 Pisarovina, Hrvatska'
+
+notes: 'Do not attach LEI 74780000F06H8UWC7I70: it belongs to JAMNICA d.d. (MBS 080001412), a different, retired company.'
+
+verified_on: 2026-09-16

@@ -1,0 +1,18 @@
+barcode: "90490705"
+name: Fanta Tropicool 0,5 L
+brand: b_fanta
+
+markets:
+  - market: BA
+    made_in: BA
+    operator: e_cchbc_bh
+    sources:
+      - 'label text: Po ovlaštenju The Coca-Cola Company proizvodi Coca-Cola HBC B-H d.o.o. Sarajevo'
+    verified_on: 2026-09-23
+
+  - market: HR
+    made_in: HR
+    operator: e_cchbc_hr
+    sources:
+      - 'label text, summarised rather than transcribed: the pack names Coca-Cola HBC Hrvatska d.o.o. for HR'
+    verified_on: 2026-09-23

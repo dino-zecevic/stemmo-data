@@ -1,0 +1,14 @@
+barcode: "3873508991982"
+name: Bingo domaće mlijeko 2,0% m.m. 1L
+brand: b_bingo
+
+markets:
+  - market: BA
+    made_in: BA
+    operator: e_mi99
+    placed_on_market_by: e_bingo
+    sources:
+      - 'label text: Za Bingo, d.o.o. Tuzla proizvodi: Mliječna industrija 99 d.o.o., ul. Sarajevska 126, 76 250, Gradačac'
+      - 'label text: Zemlja porijekla: Bosna i Hercegovina'
+      - 'label text: Na tržište BiH stavlja: Bingo doo Tuzla'
+    verified_on: 2026-09-15

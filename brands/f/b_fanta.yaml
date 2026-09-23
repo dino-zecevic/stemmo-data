@@ -1,0 +1,11 @@
+id: b_fanta
+name: Fanta
+
+brand_owner: e_tccc
+
+sources:
+  - https://www.coca-colacompany.com/brands/sparkling-soft-drinks/fanta
+  - https://www.coca-colacompany.com/brands/all-brands
+  - 'label text: Po ovlaštenju The Coca-Cola Company'
+
+verified_on: 2026-09-23

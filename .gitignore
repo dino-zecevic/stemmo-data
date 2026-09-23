@@ -7,9 +7,5 @@ Thumbs.db
 .idea/
 *.swp
 
-# Local validator runs. The validator itself lives in
-# .github/workflows/validate.yml; CONTRIBUTING suggests pasting it into a local
-# file to check data before pushing. That copy is scratch, not part of the data.
-/validate.py
 .venv/
 __pycache__/

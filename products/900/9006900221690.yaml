@@ -1,0 +1,14 @@
+barcode: "9006900221690"
+name: Pfanner Orange nektar 1 L
+brand: b_pfanner
+
+markets:
+  - market: BA
+    made_in: AT
+    operator: e_pfanner
+    placed_on_market_by: e_dzajic
+    sources:
+      - 'label text: Mjesto porijekla: Austrija'
+      - 'label text: Uvoznik i distributer za BiH: Džajić-Commerce d.o.o., A.G. Matoša 22, 88320 Ljubuški, BiH'
+      - 'label text: Hermann Pfanner Getränke GmbH, 6923 Lauterach, Austria'
+    verified_on: 2026-09-15

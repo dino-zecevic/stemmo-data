@@ -1,0 +1,15 @@
+id: e_cchbc_ag
+name: Coca-Cola HBC AG
+country: CH
+lei: 549300EFP3TNG7JGVE49
+registry_id: "CHE-235.296.902"
+
+parent: null
+ultimate_parent: null
+
+sources:
+  - https://api.gleif.org/api/v1/lei-records/549300EFP3TNG7JGVE49
+  - https://api.gleif.org/api/v1/lei-records/549300EFP3TNG7JGVE49/direct-parent-reporting-exception
+  - https://api.gleif.org/api/v1/lei-records/549300EFP3TNG7JGVE49/ultimate-parent-reporting-exception
+
+verified_on: 2026-09-16

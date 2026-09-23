@@ -1,0 +1,12 @@
+id: e_old_gold_komerc
+name: '"OLD GOLD-KOMERC" d.o.o. Dvorovi'
+country: BA
+
+sources:
+  - https://oldgoldkomerc.com/
+  - https://oldgoldkomerc.com/kontakt/
+  - 'label text, from the Prolom voda negazirana 0,75 L bottle (barcode 8600169600091): Uvoznik za BiH: "OLD GOLD - KOMERC" d.o.o., 76311 Dvorovi-Bijeljina, Karađorđeva 9A'
+
+notes: Name is the label's form and has not been checked against bizreg; a third-party site reports MBS 1-5787.
+
+verified_on: 2026-09-23

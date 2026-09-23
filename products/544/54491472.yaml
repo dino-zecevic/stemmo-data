@@ -1,0 +1,11 @@
+barcode: "54491472"
+name: Coca-Cola Original Taste 0,5 L
+brand: b_coca_cola
+
+markets:
+  - market: BA
+    made_in: BA
+    operator: e_cchbc_bh
+    sources:
+      - 'label text: Po ovlaštenju The Coca-Cola Company proizvodi Coca-Cola HBC B-H d.o.o. Sarajevo, Mostarsko raskršće br. 1, 71240 Hadžići, BiH'
+    verified_on: 2026-09-16
