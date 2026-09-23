@@ -1,0 +1,19 @@
+id: e_pfanner
+name: Hermann Pfanner Getränke GmbH
+country: AT
+lei: 529900ASC5PLN7VJWD76
+registry_id: "314034s"
+
+parent_exception: NON_PUBLIC
+ultimate_parent_exception: NON_PUBLIC
+
+sources:
+  - https://api.gleif.org/api/v1/lei-records/529900ASC5PLN7VJWD76
+  - https://api.gleif.org/api/v1/lei-records/529900ASC5PLN7VJWD76/direct-parent-reporting-exception
+  - https://api.gleif.org/api/v1/lei-records/529900ASC5PLN7VJWD76/ultimate-parent-reporting-exception
+  - https://www.pfanner.com/de/impressum/
+  - 'label text: Hermann Pfanner Getränke GmbH, Alte Landstraße 10, 6923 Lauterach, Austria'
+
+notes: Pfanner Holding AG (LEI 529900DJ9HF64VXQPQ30) shares this address, but GLEIF says the parent is not public; do not set it as parent without a Firmenbuch extract.
+
+verified_on: 2026-09-15

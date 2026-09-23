@@ -1,0 +1,10 @@
+id: b_pfanner
+name: Pfanner
+
+brand_owner: e_pfanner
+
+sources:
+  - https://www.pfanner.com/de/
+  - 'label text: Hermann Pfanner Getränke GmbH ... www.pfanner.com'
+
+verified_on: 2026-09-15

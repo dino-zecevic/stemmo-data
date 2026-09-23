@@ -1,0 +1,17 @@
+id: e_cchbc_bh
+name: Coca-Cola HBC B-H d.o.o. Sarajevo
+country: BA
+lei: 549300K4P51ZN6YBMH96
+registry_id: "65-01-0806-09"
+
+parent_exception: NON_PUBLIC
+ultimate_parent: e_cchbc_ag
+
+sources:
+  - https://api.gleif.org/api/v1/lei-records/549300K4P51ZN6YBMH96
+  - https://api.gleif.org/api/v1/lei-records/549300K4P51ZN6YBMH96/direct-parent-reporting-exception
+  - https://api.gleif.org/api/v1/lei-records/549300K4P51ZN6YBMH96/ultimate-parent
+  - 'BA/bizreg: MBS 65-01-0806-09'
+  - 'label text: Po ovlaštenju The Coca-Cola Company proizvodi Coca-Cola HBC B-H d.o.o. Sarajevo, Mostarsko raskršće br. 1, 71240 Hadžići, BiH'
+
+verified_on: 2026-09-15

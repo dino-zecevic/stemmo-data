@@ -1,0 +1,11 @@
+barcode: "90331701"
+name: Fanta Shokata 0,5 L
+brand: b_fanta
+
+markets:
+  - market: BA
+    made_in: BA
+    operator: e_cchbc_bh
+    sources:
+      - 'label text: Po ovlaštenju The Coca-Cola Company proizvodi Coca-Cola HBC B-H d.o.o. Sarajevo'
+    verified_on: 2026-09-23

@@ -16,8 +16,8 @@ body:
     id: record
     attributes:
       label: Which record
-      description: The file path, or the id. For example `entities/example-holding-ltd.yaml` or `e_example_holding_ltd`.
-      placeholder: entities/example-holding-ltd.yaml
+      description: The file path, or the id. For example `entities/GB/e_example_holding_ltd.yaml` or `e_example_holding_ltd`.
+      placeholder: entities/GB/e_example_holding_ltd.yaml
     validations:
       required: true
 

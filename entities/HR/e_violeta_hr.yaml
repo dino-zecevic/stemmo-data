@@ -1,0 +1,13 @@
+id: e_violeta_hr
+name: VIOLETA d.o.o. za proizvodnju, trgovinu i usluge
+country: HR
+registry_id: "030082703"
+
+sources:
+  - https://sudreg.pravosudje.hr/ords/r/esudreg/public/podaci-o-poslovnom-subjektu?p28_sbt_mbs=030082703
+  - 'HR/sudreg: MBS 030082703, OIB 62874063131'
+  - 'label text, from the Teta Violeta Fresh Glass Cleaner 750 ml pack (barcode 3870128012806), not from a pack of this company''s own: Uvoznik: HR: Violeta d.o.o., Obrež Zelinski 55, 10380 Sv. Ivan Zelina'
+
+notes: The register lists e_violeta_ba and one natural person as members, with no shares published, so no parent is set. LEI 747800703EHSPCMH2209 (LOGISTIKA VIOLETA, same MBS) is probably a former name; confirm in the name history before attaching.
+
+verified_on: 2026-09-17

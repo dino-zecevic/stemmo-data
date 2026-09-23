@@ -1,0 +1,13 @@
+id: b_coca_cola
+name: Coca-Cola
+aliases:
+  - Coke
+  - Coca Cola
+
+brand_owner: e_tccc
+
+sources:
+  - https://investors.coca-colacompany.com/about/our-brands
+  - 'label text: Po ovlaštenju The Coca-Cola Company'
+
+verified_on: 2026-09-15

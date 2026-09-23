@@ -1,0 +1,13 @@
+id: e_cchbc_hr
+name: COCA-COLA HBC HRVATSKA d.o.o.
+country: HR
+registry_id: "080026895"
+
+sources:
+  - https://sudreg.pravosudje.hr/ords/r/esudreg/public/podaci-o-poslovnom-subjektu?p28_sbt_mbs=080026895
+  - 'HR/sudreg: MBS 080026895, OIB 00228269289'
+  - 'label text, from the Coca-Cola Original Taste 2 L bottle (barcode 5449000000286): Uvoznik za HR: Coca-Cola HBC Hrvatska d.o.o.'
+
+notes: The register names CC BEVERAGES HOLDINGS II B.V. (NL, KvK 33298456) as sole member; set it as parent once it has its own entity record.
+
+verified_on: 2026-09-23

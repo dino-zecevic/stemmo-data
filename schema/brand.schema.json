@@ -2,13 +2,19 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://stemmo.app/schema/brand.schema.json",
   "title": "Brand",
-  "description": "A marketing name printed on products. A brand is not a company. One brand per file in brands/.",
+  "description": "A name printed on products; not a company. One per file, at brands/<first letter>/<id>.yaml.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "name", "brand_owner", "sources", "verified_on"],
+  "required": [
+    "id",
+    "name",
+    "brand_owner",
+    "sources",
+    "verified_on"
+  ],
   "properties": {
     "id": {
-      "description": "Stable slug identifying this brand.",
+      "description": "Stable slug, prefix b_. Also the filename.",
       "type": "string",
       "pattern": "^b_[a-z0-9]+(_[a-z0-9]+)*$"
     },
@@ -18,38 +24,54 @@
       "minLength": 1
     },
     "aliases": {
-      "description": "Alternative spellings, local-language forms and common transliterations.",
+      "description": "Other spellings seen in use, including local-language forms.",
       "type": "array",
-      "items": { "type": "string", "minLength": 1 },
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
       "uniqueItems": true
     },
     "brand_owner": {
-      "description": "id of the entity that owns the trademark.",
+      "description": "The entity that owns the trademark.",
       "type": "string",
       "pattern": "^e_[a-z0-9]+(_[a-z0-9]+)*$"
     },
     "sources": {
-      "description": "Where this record was checked. At least one entry must be either a URL anyone can open, or a structured register citation of the form <ISO 3166-1 alpha-2 country>/<register>: <identifier> - for example 'BA/IIP-BIH: trade mark 1417973'. The second form exists for trademark and company registers that publish no stable per-record URL: what makes such a record checkable is the identifier, not a link to a search form. Transcribed label text alone is never enough for a brand record.",
+      "description": "At least one URL or register citation (<country>/<register>: <identifier>). Label text alone is not enough.",
       "type": "array",
       "minItems": 1,
-      "items": { "type": "string", "minLength": 1 },
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
       "contains": {
         "type": "string",
         "anyOf": [
-          { "pattern": "^https?://" },
-          { "pattern": "^[A-Z]{2}/[A-Za-z][A-Za-z0-9_-]*: \\S" }
+          {
+            "pattern": "^https?://"
+          },
+          {
+            "pattern": "^[A-Z]{2}/[A-Za-z][A-Za-z0-9_-]*: \\S"
+          }
         ]
       },
       "minContains": 1
     },
+    "notes": {
+      "description": "Optional, 1-2 sentences. Only for a fact that stops the next editor making a wrong change the validator cannot catch.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
     "verified_on": {
-      "description": "ISO 8601 date on which a human last checked this record against its sources.",
+      "description": "ISO 8601 date on which a person last checked this record against its sources.",
       "type": "string",
       "format": "date",
       "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
     },
     "example": {
-      "description": "true if this file is a seeded template rather than curated data.",
+      "description": "true if this file is a template rather than curated data.",
       "type": "boolean"
     }
   }

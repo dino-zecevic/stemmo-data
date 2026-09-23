@@ -1,0 +1,13 @@
+id: e_violeta_ba
+name: VIOLETA d.o.o. za proizvodnju i trgovinu GRUDE
+former_names:
+  - VIOLETA d.o.o. za proizvodnju i trgovinu TOMISLAVGRAD
+country: BA
+registry_id: "64-01-0004-17"
+
+sources:
+  - 'BA/bizreg: MBS 64-01-0004-17'
+  - 'label text: Proizvođač: Violeta d.o.o., Stjepana Radića 21, 88340 Grude, BiH'
+  - https://sudreg.pravosudje.hr/ords/r/esudreg/public/podaci-o-poslovnom-subjektu?p28_sbt_mbs=030082703
+
+verified_on: 2026-09-16

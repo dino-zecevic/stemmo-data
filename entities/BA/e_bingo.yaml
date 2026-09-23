@@ -1,0 +1,19 @@
+id: e_bingo
+name: '"BINGO" d.o.o. export-import Tuzla'
+country: BA
+lei: 485100RHNHAW0UJREQ36
+registry_id: "1-5356"
+
+parent: null
+ultimate_parent: null
+
+sources:
+  - https://api.gleif.org/api/v1/lei-records/485100RHNHAW0UJREQ36
+  - https://api.gleif.org/api/v1/lei-records/485100RHNHAW0UJREQ36/direct-parent-reporting-exception
+  - https://api.gleif.org/api/v1/lei-records/485100RHNHAW0UJREQ36/ultimate-parent-reporting-exception
+  - 'BA/bizreg: MBS 1-5356'
+  - 'label text: Na tržište BiH stavlja: Bingo doo Tuzla, ul. Bosanska poljana bb, 75000 Tuzla, Bosna i Hercegovina'
+
+notes: Both nulls come from GLEIF's NATURAL_PERSONS exception (the owners are individuals). The GLEIF record is LAPSED since 2023-09-27; re-check before relying on it.
+
+verified_on: 2026-09-18

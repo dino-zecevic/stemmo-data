@@ -4,7 +4,7 @@ not exist yet. Several products from one producer may share a pull request where
 the entity and brand work is shared. A correction is its own pull request. Never
 mix a data addition with a schema or editorial-policy change.
 
-The full rule is in CONTRIBUTING.md, under "What goes in one pull request".
+The full rule is in CONTRIBUTING.md, under "The pull request".
 
 Fill in what applies and delete the rest, including these comments. A heading
 with nothing under it is fine if that work genuinely was not needed — an empty
@@ -46,7 +46,8 @@ name allows it — the full legal name and a shorter distinctive fragment.
   search "Sarajevski",          country filter BA, 2026-09-16 -> no records
 
 State any near-miss and why you rejected it, rather than leaving it out.
-See EDITORIAL-POLICY.md, "A GLEIF negative is cited by recording the query".
+This description is where that research is kept; records carry no comments.
+See EDITORIAL-POLICY.md, "Research goes in the pull request, not the record".
 -->
 
 ## Ownership

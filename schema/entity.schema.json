@@ -2,78 +2,132 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://stemmo.app/schema/entity.schema.json",
   "title": "Entity",
-  "description": "A real registered legal company. One entity per file in entities/.",
+  "description": "A registered legal company. One per file, at entities/<country>/<id>.yaml.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "name", "country", "sources", "verified_on"],
+  "required": [
+    "id",
+    "name",
+    "country",
+    "sources",
+    "verified_on"
+  ],
   "properties": {
     "id": {
-      "description": "Stable slug identifying this entity.",
+      "description": "Stable slug, prefix e_. Also the filename.",
       "type": "string",
       "pattern": "^e_[a-z0-9]+(_[a-z0-9]+)*$"
     },
     "name": {
-      "description": "The exact registered legal name, including the legal form.",
+      "description": "The exact legal name as the national register prints it, legal form included.",
       "type": "string",
       "minLength": 1
     },
+    "former_names": {
+      "description": "Earlier legal names, as a register records them.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
     "country": {
-      "description": "ISO 3166-1 alpha-2 code of the country of registration.",
+      "description": "ISO 3166-1 alpha-2 country of registration. Also the directory name.",
       "type": "string",
       "pattern": "^[A-Z]{2}$"
     },
     "parent": {
-      "description": "id of the entity that DIRECTLY owns this one, or null if a source confirms nothing owns it. This is the immediate owner only. The top of the ownership chain is ultimate_parent, and writing an ultimate parent into this field is an overclaim: it asserts a direct holding that the source did not establish. Absent and null are different claims and must not be used interchangeably: omit the field entirely when ownership has not been established, and write null only when a source confirms this entity is owned by nobody. An absent parent says the question is still open; null says it has been answered and the answer is that there is no parent. Never write null merely because no parent was found - that is an absent parent. Where a source states that a parent exists but does not disclose it, use parent_exception instead.",
-      "type": ["string", "null"],
+      "description": "The entity that directly owns this one. Omit when not established; null only when a source confirms there is no owner. See docs/fields.md.",
+      "type": [
+        "string",
+        "null"
+      ],
       "pattern": "^e_[a-z0-9]+(_[a-z0-9]+)*$"
     },
     "parent_exception": {
-      "description": "Set when a source states that a direct parent exists but its identity is not disclosed. This is a third state, distinct from both absent and null: the question was asked, the answer exists, and it is withheld. Mutually exclusive with parent - a record either names the direct owner, confirms there is none, or reports that the answer is withheld, never two of those at once. The validator enforces this. Values are the GLEIF reporting-exception reasons. Note that not every GLEIF exception belongs here: NON_CONSOLIDATING states that no parent consolidates the entity, which is a sourced claim of no parent and is recorded as null.",
+      "description": "A source says a direct owner exists but does not disclose it. Mutually exclusive with parent.",
       "type": "string",
-      "enum": ["NON_PUBLIC", "NON_CONSOLIDATING", "NO_LEI", "NATURAL_PERSONS", "NO_KNOWN_PERSON", "LEGAL_OBSTACLES", "BINDING_LEGAL_COMMITMENTS", "DISCLOSURE_DETRIMENTAL", "DETRIMENT_NOT_EXCLUDED"]
+      "enum": [
+        "NON_PUBLIC",
+        "NON_CONSOLIDATING",
+        "NO_LEI",
+        "NATURAL_PERSONS",
+        "NO_KNOWN_PERSON",
+        "LEGAL_OBSTACLES",
+        "BINDING_LEGAL_COMMITMENTS",
+        "DISCLOSURE_DETRIMENTAL",
+        "DETRIMENT_NOT_EXCLUDED"
+      ]
     },
     "ultimate_parent": {
-      "description": "id of the entity at the top of this one's ownership chain, or null if a source confirms this entity is itself the top. Distinct from parent, which is the immediate owner. The two are independent: both may be present, either may appear alone, and both may be absent. Real ownership data routinely publishes one without the other - GLEIF may publish an ultimate parent while the direct parent is withheld, which is exactly why these are two fields and not one. Same absent-versus-null semantics as parent, and the same rule that a withheld answer goes in ultimate_parent_exception rather than here.",
-      "type": ["string", "null"],
+      "description": "The entity at the top of the chain. Same four states as parent, and independent of it.",
+      "type": [
+        "string",
+        "null"
+      ],
       "pattern": "^e_[a-z0-9]+(_[a-z0-9]+)*$"
     },
     "ultimate_parent_exception": {
-      "description": "Set when a source states that an ultimate parent exists but its identity is not disclosed. Mutually exclusive with ultimate_parent, enforced by the validator. Values are the GLEIF reporting-exception reasons.",
+      "description": "A source says the top of the chain exists but does not disclose it. Mutually exclusive with ultimate_parent.",
       "type": "string",
-      "enum": ["NON_PUBLIC", "NON_CONSOLIDATING", "NO_LEI", "NATURAL_PERSONS", "NO_KNOWN_PERSON", "LEGAL_OBSTACLES", "BINDING_LEGAL_COMMITMENTS", "DISCLOSURE_DETRIMENTAL", "DETRIMENT_NOT_EXCLUDED"]
+      "enum": [
+        "NON_PUBLIC",
+        "NON_CONSOLIDATING",
+        "NO_LEI",
+        "NATURAL_PERSONS",
+        "NO_KNOWN_PERSON",
+        "LEGAL_OBSTACLES",
+        "BINDING_LEGAL_COMMITMENTS",
+        "DISCLOSURE_DETRIMENTAL",
+        "DETRIMENT_NOT_EXCLUDED"
+      ]
     },
     "lei": {
-      "description": "GLEIF Legal Entity Identifier: 20 characters, the last two being ISO 7064 Mod 97-10 check digits, which the validator verifies. A GLEIF record is a qualifying source in its own right and is cited as a URL, because api.gleif.org publishes a stable per-record address - unlike the register search applications that the structured citation form exists for. It is also, at present, the only source in use here that publishes ownership rather than identity.",
+      "description": "GLEIF Legal Entity Identifier. Check digits are validated.",
       "type": "string",
       "pattern": "^[A-Z0-9]{18}[0-9]{2}$"
     },
     "registry_id": {
-      "description": "National company register number, as printed by the register.",
+      "description": "National register number, as the register prints it. Required when the only qualifying source is a register citation.",
       "type": "string",
       "minLength": 1
     },
     "sources": {
-      "description": "Where this record was checked. At least one entry must be either a URL anyone can open, or a structured register citation of the form <ISO 3166-1 alpha-2 country>/<register>: <identifier> - for example 'BA/bizreg: MBS 1-5356' or 'AT/Firmenbuch: FN 314034s'. The second form exists for registers that publish no stable per-record URL: what makes such a record checkable is the identifier, which a reader uses to look the company up themselves, so citing the register's search form as a URL satisfies the letter of the rule while telling the reader nothing. When the only qualifying source is a structured register citation, registry_id must also be present; the validator enforces this. Transcribed label text alone is never enough for an entity record.",
+      "description": "At least one URL or register citation (<country>/<register>: <identifier>). Label text alone is not enough.",
       "type": "array",
       "minItems": 1,
-      "items": { "type": "string", "minLength": 1 },
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
       "contains": {
         "type": "string",
         "anyOf": [
-          { "pattern": "^https?://" },
-          { "pattern": "^[A-Z]{2}/[A-Za-z][A-Za-z0-9_-]*: \\S" }
+          {
+            "pattern": "^https?://"
+          },
+          {
+            "pattern": "^[A-Z]{2}/[A-Za-z][A-Za-z0-9_-]*: \\S"
+          }
         ]
       },
       "minContains": 1
     },
+    "notes": {
+      "description": "Optional, 1-2 sentences. Only for a fact that stops the next editor making a wrong change the validator cannot catch.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
     "verified_on": {
-      "description": "ISO 8601 date on which a human last checked this record against its sources.",
+      "description": "ISO 8601 date on which a person last checked this record against its sources.",
       "type": "string",
       "format": "date",
       "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
     },
     "example": {
-      "description": "true if this file is a seeded template rather than curated data.",
+      "description": "true if this file is a template rather than curated data.",
       "type": "boolean"
     }
   }
