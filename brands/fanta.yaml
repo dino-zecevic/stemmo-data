@@ -1,0 +1,20 @@
+# Sourced to the company's own website, checked 2026-09-23. The Fanta page calls
+#   it "Our second oldest brand" and marks the name "Fanta®" under
+#   "© 2026 The Coca‑Cola Company. All rights reserved.", and the all-brands page
+#   lists Fanta under Sparkling Soft Drinks. Neither states trademark ownership
+#   in so many words. A register entry would be stronger.
+# Flavours (Orange, Lemon, Tropicool, Shokata and so on) are ranges within this
+#   brand, not brands of their own, and are carried in the product name. See
+#   "Sub-brands do not get their own file" in CONTRIBUTING.md.
+
+id: b_fanta
+name: Fanta
+
+brand_owner: e_tccc
+
+sources:
+  - https://www.coca-colacompany.com/brands/sparkling-soft-drinks/fanta
+  - https://www.coca-colacompany.com/brands/all-brands
+  - "label text: Po ovlaštenju The Coca-Cola Company"
+
+verified_on: 2026-09-23

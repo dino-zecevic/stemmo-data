@@ -37,3 +37,59 @@
       sources:
         - "label text: Po ovlaštenju The Coca-Cola Company proizvodi Coca-Cola HBC B-H d.o.o. Sarajevo, Mostarsko raskršće br. 1, 71240 Hadžići, BiH"
       verified_on: 2026-09-16
+
+- barcode: "5449000000286"
+  name: Coca-Cola Original Taste 2 L
+  brand: b_coca_cola
+
+  markets:
+    # No placed_on_market_by: for BiH the label names no party separate from the
+    #   bottler.
+    - market: BA
+      made_in: BA
+      operator: e_cchbc_bh
+      sources:
+        - "label text: Po ovlaštenju The Coca-Cola Company proizvodi Coca-Cola HBC B-H d.o.o. Sarajevo"
+      verified_on: 2026-09-23
+
+    # The bottle was bought in BiH, not in Croatia. This record rests on the same
+    #   BiH-bought label, which is printed for both markets and names an importer
+    #   for HR. made_in and operator are that label's production line: it names
+    #   one producer for the bottle, with no separate producer for HR.
+    - market: HR
+      made_in: BA
+      operator: e_cchbc_bh
+      placed_on_market_by: e_cchbc_hr    # importer for HR
+      sources:
+        - "label text: Po ovlaštenju The Coca-Cola Company proizvodi Coca-Cola HBC B-H d.o.o. Sarajevo"
+        - "label text: Uvoznik za HR: Coca-Cola HBC Hrvatska d.o.o."
+      verified_on: 2026-09-23
+
+# Cherry is a flavour within the Coca-Cola brand, not a brand of its own, so it
+#   is carried in the product name. See "Sub-brands do not get their own file"
+#   in CONTRIBUTING.md.
+- barcode: "54492790"
+  name: Coca-Cola Cherry Taste 0,5 L
+  brand: b_coca_cola
+
+  markets:
+    # No placed_on_market_by: the label names no party separate from the bottler.
+    - market: BA
+      made_in: BA
+      operator: e_cchbc_bh
+      sources:
+        - "label text: Po ovlaštenju The Coca-Cola Company proizvodi Coca-Cola HBC B-H d.o.o. Sarajevo"
+      verified_on: 2026-09-23
+
+- barcode: "5449000349361"
+  name: Fanta Lemon 0,5 L
+  brand: b_fanta
+
+  markets:
+    # No placed_on_market_by: the label names no party separate from the bottler.
+    - market: BA
+      made_in: BA
+      operator: e_cchbc_bh
+      sources:
+        - "label text: Po ovlaštenju The Coca-Cola Company proizvodi Coca-Cola HBC B-H d.o.o. Sarajevo"
+      verified_on: 2026-09-23
