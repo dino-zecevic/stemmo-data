@@ -1,0 +1,32 @@
+# NOT CHECKED AGAINST THE BiH REGISTER. The name and address below come from the
+#   label and the company's own website, not from bizreg.pravosudje.ba, which
+#   is the authority on the legal name and has not been consulted. Until it is,
+#   treat the name as the label's form rather than the registered one.
+#
+# Company Wall, a third-party aggregator and not an acceptable source on its own
+#   (see "Not acceptable" in EDITORIAL-POLICY.md), reports MBS 1-5787,
+#   JIB 4402020300006, full name "Društvo sa ograničenom odgovornošću za
+#   proizvodnju, trgovinu, ugostiteljstvo i usluge "OLD GOLD-KOMERC" Dvorovi",
+#   Karadjordjeva 9A, 76311 Dvorovi. None of it is recorded as a field. Looking
+#   up that MBS in bizreg is what turns this into a checked record, and fills in
+#   registry_id.
+#
+# The website confirms the address, Karađorđeva 9a, Dvorovi 76311, Bijeljina,
+#   describes the business as "trgovina na veliko i malo robom iz uvoza", and
+#   lists Prolom voda among its products — consistent with the label naming it
+#   the BiH importer.
+#
+# parent: not established. Company Wall names an individual as owner; nothing
+#   about them is recorded — see "Natural persons are never recorded" in
+#   EDITORIAL-POLICY.md. GLEIF: not queried.
+
+id: e_old_gold_komerc
+name: '"OLD GOLD-KOMERC" d.o.o. Dvorovi'
+country: BA
+
+sources:
+  - https://oldgoldkomerc.com/
+  - https://oldgoldkomerc.com/kontakt/
+  - 'label text, from the Prolom voda negazirana 0,75 L bottle (barcode 8600169600091): Uvoznik za BiH: "OLD GOLD - KOMERC" d.o.o., 76311 Dvorovi-Bijeljina, Karađorđeva 9A'
+
+verified_on: 2026-09-23

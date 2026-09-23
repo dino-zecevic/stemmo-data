@@ -1,0 +1,35 @@
+# Register extract, checked 2026-09-23 via sudreg.pravosudje.hr: MBS 080026895,
+#   OIB 00228269289, EUID HRSR.080026895, sud Trgovački sud u Zagrebu,
+#   status Bez postupka, pravni oblik društvo s ograničenom odgovornošću,
+#   adresa Zagreb (Grad Zagreb), Sachsova ulica 1.
+#   Tvrtka: COCA-COLA HBC HRVATSKA - društvo s ograničenom odgovornošću za
+#   proizvodnju, prodaju i distribuciju bezalkoholnih pića.
+#   The name below is the register's skraćena tvrtka, as the register prints it;
+#   the label gives the same name as "Coca-Cola HBC Hrvatska d.o.o." in mixed case.
+#   sudreg publishes a stable per-record URL, so it is cited as one — see
+#   entities/violeta-doo-hr.yaml.
+#
+# PARENT NOT RECORDED, AND NOT YET LOOKED FOR BEYOND THE REGISTER.
+#   The register's Osnivači/članovi društva section names one corporate member:
+#   CC BEVERAGES HOLDINGS II B.V., Nizozemska, Amsterdam, Radarweg 60, broj iz
+#   registra 33298456 (Trgovački registar, Nizozemska gospodarska komora),
+#   OIB 01975093903 — jedini član d.o.o.
+#   That is a sourced direct owner, but this dataset has no entity record for
+#   it yet, and one needs its own identity source (the Dutch KvK register) before
+#   parent can point at it. Until then parent is absent, not null.
+#   The same extract names individuals as board members and director. They are
+#   not recorded — see "Natural persons are never recorded" in EDITORIAL-POLICY.md.
+#
+# GLEIF: not queried yet. No LEI is recorded, and none is claimed not to exist.
+
+id: e_cchbc_hr
+name: COCA-COLA HBC HRVATSKA d.o.o.
+country: HR
+registry_id: "080026895"          # MBS
+
+sources:
+  - https://sudreg.pravosudje.hr/ords/r/esudreg/public/podaci-o-poslovnom-subjektu?p28_sbt_mbs=080026895
+  - "HR/sudreg: MBS 080026895, OIB 00228269289"
+  - "label text, from the Coca-Cola Original Taste 2 L bottle (barcode 5449000000286): Uvoznik za HR: Coca-Cola HBC Hrvatska d.o.o."
+
+verified_on: 2026-09-23

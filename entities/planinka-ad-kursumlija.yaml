@@ -1,0 +1,29 @@
+# Register extract, checked 2026-09-23 via pretraga.apr.gov.rs (Agencija za
+#   privredne registre, Registar privrednih društava): matični broj 07108079,
+#   PIB 100622505, status Активан, pravna forma Акционарско друштво,
+#   adresa sedišta Косовска 44, 18430 Куршумлија.
+#   Poslovno ime: AKCIONARSKO DRUŠTVO ZA PRIRODNA LEČILIŠTA, TURIZAM,
+#   UGOSTITELJSTVO I PROIZVODNJU PLANINKA KURŠUMLIJA.
+#   The name below is the register's skraćeno poslovno ime, as the register
+#   prints it; the label gives the company as AD "PLANINKA".
+#   APR's detail page carries no stable per-record URL, so the register is cited
+#   by its identifier — see "How a source is cited" in EDITORIAL-POLICY.md.
+#
+# The extract names individuals as legal and other representatives. They are
+#   not recorded — see "Natural persons are never recorded" in EDITORIAL-POLICY.md.
+#
+# parent: not established. The extract as consulted showed nothing under
+#   Članovi. GLEIF: not queried yet. No LEI is recorded, and none is claimed not
+#   to exist.
+
+id: e_planinka
+name: PLANINKA AD KURŠUMLIJA
+country: RS
+registry_id: "07108079"
+
+sources:
+  - "RS/APR: matični broj 07108079, PIB 100622505"
+  - https://planinka.rs/prolom-voda/
+  - 'label text: Proizvodi i puni: AD "PLANINKA", Kosovska 44, 18430 Kuršumlija, Srbija'
+
+verified_on: 2026-09-23

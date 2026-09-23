@@ -40,3 +40,29 @@
         - "label text: Zemlja porijekla: Bosna i Hercegovina"
         - "label text: Proizvođač: Violeta d.o.o., Stjepana Radića 21, 88340 Grude, BiH"
       verified_on: 2026-09-16
+
+    # The pack was bought in BiH; this record rests on the same label, which is
+    #   printed for both markets and names an importer for HR.
+    - market: HR
+      made_in: BA
+      operator: e_violeta_ba
+      placed_on_market_by: e_violeta_hr    # importer for HR
+      sources:
+        - "label text: Zemlja porijekla: Bosna i Hercegovina"
+        - "label text: Proizvođač: Violeta d.o.o., Stjepana Radića 21, 88340 Grude, BiH"
+        - "label text: Uvoznik: HR: Violeta d.o.o., Obrež Zelinski 55, 10380 Sv. Ivan Zelina"
+      verified_on: 2026-09-23
+
+- barcode: "3875000183445"
+  name: Sarajevski kiseljak 1,5 L
+  brand: b_sarajevski_kiseljak
+
+  markets:
+    # No placed_on_market_by: the label names no party separate from the producer.
+    - market: BA
+      made_in: BA
+      operator: e_sarajevski_kiseljak
+      sources:
+        - "label text: Proizvodi i puni: Sarajevski kiseljak d.o.o. Bosna i Hercegovina"
+        - "label text: Zemlja porijekla: Bosna i Hercegovina"
+      verified_on: 2026-09-23
