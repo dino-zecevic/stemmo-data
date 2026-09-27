@@ -1,0 +1,18 @@
+id: e_hell_energy_hu
+name: HELL ENERGY Magyarország Korlátolt Felelősségű Társaság
+country: HU
+lei: 549300GGXAM3ED36FJ68
+registry_id: "01-09-729429"
+
+parent: null
+ultimate_parent: null
+
+sources:
+  - https://api.gleif.org/api/v1/lei-records/549300GGXAM3ED36FJ68
+  - https://api.gleif.org/api/v1/lei-records/549300GGXAM3ED36FJ68/direct-parent-reporting-exception
+  - https://api.gleif.org/api/v1/lei-records/549300GGXAM3ED36FJ68/ultimate-parent-reporting-exception
+  - 'label text: Proizvođač: HELL ENERGY Magyarország Kft., Andrássy út 126., H-1062 Budapest, Mađarska, www.hellicecoffee.com. Proizvedeno u Mađarskoj.'
+
+notes: Name and number are GLEIF's (FULLY_CORROBORATED, CONFORMING); companyregister.hu, a private site, agrees. The official e-cegjegyzek.hu has not been checked.
+
+verified_on: 2026-09-27

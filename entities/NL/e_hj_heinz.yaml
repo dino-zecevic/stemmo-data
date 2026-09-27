@@ -1,0 +1,12 @@
+id: e_hj_heinz
+name: H.J. Heinz B.V.
+country: NL
+registry_id: "35015086"
+
+sources:
+  - https://opencorporates.com/companies/nl/35015086
+  - 'label text: Proizvodjač: H.J. Heinz B.V. Holandija'
+
+notes: KvK has not been checked directly; the name and number are OpenCorporates' copy of it. None of the H.J. Heinz LEIs in GLEIF carries registry number 35015086.
+
+verified_on: 2026-09-27

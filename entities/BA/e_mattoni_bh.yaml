@@ -1,0 +1,14 @@
+id: e_mattoni_bh
+name: '"Mattoni BH" društvo sa ograničenom odgovornošću Banja Luka'
+country: BA
+registry_id: "4401361770004"
+
+parent: e_knjaz_milos
+
+sources:
+  - 'BA/bizreg-esrpska: JIB 4401361770004'
+  - 'label text: Uvoznik za BIH: Mattoni BH d.o.o., Kolubarska 15, 78000 Banja Luka, BiH.'
+
+notes: registry_id is the JIB; the Republika Srpska register (bizreg.esrpska.com) gives no MBS. It names KNJAZ MILOŠ AD Aranđelovac as the only osnivač, which is the source for parent.
+
+verified_on: 2026-09-27

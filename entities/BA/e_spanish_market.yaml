@@ -1,0 +1,10 @@
+id: e_spanish_market
+name: SPANISH MARKET Društvo sa ograničenom odgovornošću za unutrašnju i spoljnu trgovinu Sarajevo
+country: BA
+registry_id: "65-01-0570-10"
+
+sources:
+  - 'BA/bizreg: MBS 65-01-0570-10, JIB 4200093060001'
+  - 'label text: UVOZNIK I DISTRIBUTER ZA BA: SPANISH MARKET doo, Bojnička 44, 71000 Sarajevo, BA.'
+
+verified_on: 2026-09-27

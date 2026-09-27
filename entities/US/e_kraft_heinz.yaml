@@ -1,0 +1,18 @@
+id: e_kraft_heinz
+name: The Kraft Heinz Company
+country: US
+lei: 9845007488EC87F5AF14
+registry_id: "5286651"
+
+parent_exception: NO_KNOWN_PERSON
+ultimate_parent_exception: NO_KNOWN_PERSON
+
+sources:
+  - https://api.gleif.org/api/v1/lei-records/9845007488EC87F5AF14
+  - https://api.gleif.org/api/v1/lei-records/9845007488EC87F5AF14/direct-parent-reporting-exception
+  - https://api.gleif.org/api/v1/lei-records/9845007488EC87F5AF14/ultimate-parent-reporting-exception
+  - https://www.kraftheinzcompany.com/brands.html
+
+notes: registry_id is the Delaware file number GLEIF gives; the Delaware register itself has not been checked. Name is the company's own form; GLEIF prints it in capitals.
+
+verified_on: 2026-09-28

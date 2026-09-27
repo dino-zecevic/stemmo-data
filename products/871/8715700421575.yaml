@@ -1,0 +1,13 @@
+barcode: "8715700421575"
+name: 'Heinz Tomato Ketchup 570 g / 500 ml'
+brand: b_heinz
+
+markets:
+  - market: BA
+    made_in: NL
+    operator: e_hj_heinz
+    placed_on_market_by: e_orbico
+    sources:
+      - 'label text: Proizvodjač: H.J. Heinz B.V. Holandija, Proizvedeno u:/Uvezeno iz: Holandija.'
+      - 'label text: Uvoznik: Orbico d.o.o., Lužansko polje no. 7, 71000 Sarajevo, Bosna i Hercegovina.'
+    verified_on: 2026-09-27
