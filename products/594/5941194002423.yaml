@@ -1,0 +1,13 @@
+barcode: "5941194002423"
+name: 'Croco Brezel Crackers Mix 250 g'
+brand: b_croco
+
+markets:
+  - market: BA
+    made_in: RO
+    operator: e_croco
+    placed_on_market_by: e_tp_drinovci
+    sources:
+      - 'label text: Proizvođač: SC CROCO S.R.L., Str. Slanicului 12, Onesti'
+      - 'label text: Zemlja podrijetla:Rumunjska.Uvoznik i distributer za BiH: T.P. DRINOVCI d.o.o.,GZ Pogana Vlaka-Poljanice br.1, Donji Mamići 88340 Grude;'
+    verified_on: 2026-09-27

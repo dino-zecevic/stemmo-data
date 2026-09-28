@@ -1,0 +1,12 @@
+id: e_croco
+name: CROCO SRL
+country: RO
+registry_id: "J1994001541042"
+
+sources:
+  - https://listafirme.eu/croco-srl-6268054/
+  - 'label text: Proizvođač: SC CROCO S.R.L., Str. Slanicului 12, Onesti'
+
+notes: ONRC has not been checked directly (it needs an account); name and numbers are listafirme.eu's copy, which also gives CUI 6268054 and EUID ROONRC.J1994001541042.
+
+verified_on: 2026-09-27

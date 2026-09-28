@@ -1,0 +1,15 @@
+id: e_knjaz_milos
+name: KNJAZ MILOŠ AD ARANĐELOVAC
+country: RS
+lei: 5299006UO9MVS8RZXP08
+registry_id: "07347383"
+
+sources:
+  - 'RS/APR: matični broj 07347383'
+  - https://api.gleif.org/api/v1/lei-records/5299006UO9MVS8RZXP08
+  - https://knjaz.rs/about-us/?lang=en
+  - 'label text: Proizvođač: KNJAZ MILOŠ a.d., Krćevački put 26, 34300 Aranđelovac, Republika Srbija.'
+
+notes: "Do not set parents to null from GLEIF's NON_CONSOLIDATING. That LEI is LAPSED, and the company's own site says Mattoni 1873 became sole owner in 2024."
+
+verified_on: 2026-09-27

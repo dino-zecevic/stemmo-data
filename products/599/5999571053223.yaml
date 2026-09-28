@@ -1,0 +1,13 @@
+barcode: "5999571053223"
+name: HELL Ice Coffee Pink Latte 250 ml
+brand: b_hell
+
+markets:
+  - market: BA
+    made_in: HU
+    operator: e_hell_energy_hu
+    placed_on_market_by: e_spanish_market
+    sources:
+      - 'label text: Proizvođač: HELL ENERGY Magyarország Kft., Andrássy út 126., H-1062 Budimpešta, Mađarska. Odobreni broj: HU 1522 EK. Proizvedeno u Mađarskoj,'
+      - 'label text: UVOZNIK I DISTRIBUTER ZA BA: SPANISH MARKET doo, Bojnička 44, 71000 Sarajevo, BA.'
+    verified_on: 2026-09-27

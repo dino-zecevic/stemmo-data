@@ -1,0 +1,14 @@
+barcode: "8600037000879"
+name: 'Aqua Viva 2,5 L'
+brand: b_aqua_viva
+
+markets:
+  - market: BA
+    made_in: RS
+    operator: e_knjaz_milos
+    placed_on_market_by: e_mattoni_bh
+    sources:
+      - 'label text: Proizvođač: KNJAZ MILOŠ a.d., Krćevački put 26, 34300 Aranđelovac, Republika Srbija.'
+      - 'label text: Zemlja porijekla: Republika Srbija.'
+      - 'label text: Uvoznik za BIH: Mattoni BH d.o.o., Kolubarska 15, 78000 Banja Luka, BiH.'
+    verified_on: 2026-09-27

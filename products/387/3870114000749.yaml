@@ -1,0 +1,12 @@
+barcode: "3870114000749"
+name: 'Ovako Goveđi gulaš 200 g'
+brand: b_ovako
+
+markets:
+  - market: BA
+    made_in: BA
+    operator: e_ovako
+    sources:
+      - 'label text: Proizvođač/Prodhuesi/Производител: „OVAKO“ d.o.o. Mostarsko raskršće b.b., 71240 Hadžići, BiH.'
+      - 'label text: Zemlja porijekla BiH'
+    verified_on: 2026-09-27

@@ -1,0 +1,13 @@
+barcode: "5999860497073"
+name: HELL Ice Coffee Latte 250 ml
+brand: b_hell
+
+markets:
+  - market: BA
+    made_in: HU
+    operator: e_hell_energy_hu
+    placed_on_market_by: e_spanish_market
+    sources:
+      - 'label text: Proizvođač: HELL ENERGY Magyarország Kft., Andrássy út 126., H-1062 Budapest, Mađarska, www.hellicecoffee.com. Proizvedeno u Mađarskoj.'
+      - 'label text: UVOZNIK I DISTRIBUTER ZA BA: SPANISH MARKET doo, Bojnička 44, 71000 Sarajevo, BA.'
+    verified_on: 2026-09-27
